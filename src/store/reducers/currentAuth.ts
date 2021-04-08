@@ -4,7 +4,7 @@ import {
   SIGN_IN,
   SIGN_OUT,
   SIGN_UP,
-} from '../actions/constans.d';
+} from '@store/actions/constans.d';
 import { AuthActions, AuthState } from 'type/types';
 
 const initialState = {

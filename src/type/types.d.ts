@@ -7,8 +7,8 @@ import {
 } from 'store/actions/constans';
 
 export type User = {
-  email: string;
-  uid: string;
+  email: any;
+  uid: any;
 };
 
 export type AuthActions =

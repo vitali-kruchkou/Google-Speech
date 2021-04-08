@@ -1,10 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  signInWithGoogle,
-  signInEmailAndPassword,
-} from '../../../firebase/firebaseAuthQueries';
 import { Form, Input, Divider, Tooltip } from 'antd';
 import { Toaster } from 'react-hot-toast';
 import {
@@ -13,6 +9,10 @@ import {
   InfoCircleOutlined,
 } from '@ant-design/icons';
 import Style from './StyledSignIn';
+import {
+  signInEmailAndPassword,
+  signInWithGoogle,
+} from '@firebaseConfig/firebaseAuthQueries';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');

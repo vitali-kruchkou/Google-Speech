@@ -7,7 +7,6 @@ import {
 } from './constans.d';
 import allActions from '.';
 import { AppDispatch, AuthActions, User } from 'type/types';
-
 import toast from 'react-hot-toast';
 import {
   resetPassword,
@@ -15,7 +14,7 @@ import {
   signInWithGoogle,
   SignOut,
   signUpEmailAndPassword,
-} from '../../firebase/firebaseAuthQueries';
+} from '@firebaseConfig/firebaseAuthQueries';
 
 const signIn = (user: User | null): AuthActions => {
   return {
