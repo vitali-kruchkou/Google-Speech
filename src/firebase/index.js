@@ -12,8 +12,8 @@ export const auth = firebaseApp.auth();
 export const firestore = firebaseApp.firestore();
 const storage = firebaseApp.storage();
 export const storageRef = storage.ref();
-const database = firebaseApp.database();
-export const databaseRef = database.ref();
+// const database = firebaseApp.database();
+// export const databaseRef = database.ref();
 
 export const generateUserDocument = async (user, additionalData) => {
   if (!user) return;

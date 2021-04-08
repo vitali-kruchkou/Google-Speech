@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useCallback, useState } from 'react';
-import { signInWithGoogle } from '@firebaseConfig/index';
+import {
+  signInWithGoogle,
+  signUpEmailAndPassword,
+} from '../../../firebase/firebaseAuthQueries';
 import { Form, Input, Divider, Tooltip } from 'antd';
 import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Style from './StyledSignUp';
-import { signUpEmailAndPassword } from '@firebaseConfig';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
