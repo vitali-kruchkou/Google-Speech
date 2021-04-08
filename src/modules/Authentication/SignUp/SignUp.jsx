@@ -1,39 +1,26 @@
 /* eslint-disable no-unused-vars */
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Divider, Tooltip } from 'antd';
 import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Style from './StyledSignUp';
-import {
-  signInWithGoogle,
-  signUpEmailAndPassword,
-} from '@firebaseConfig/firebaseAuthQueries';
+import { useDispatch } from 'react-redux';
+import allActions from '@store/actions';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');
   const history = useHistory();
-  const createUserWithEmailAndPasswordHandler = (event, email, password) => {
-    signUpEmailAndPassword(event, email, password);
-    setEmail('');
-    setPassword('');
-    setDisplayName('');
-  };
+  const dispatch = useDispatch();
 
-  const onChangeHandlerEmail = useCallback(
-    event => {
-      const { name, value } = event.currentTarget;
-      const udpate = () => {
-        if (name === 'userEmail') {
-          setEmail(value);
-        }
-      };
-      udpate();
-    },
-    [setEmail],
-  );
+  const onChangeHandlerEmail = event => {
+    const { name, value } = event.currentTarget;
+    if (name === 'userEmail') {
+      setEmail(value);
+    }
+  };
 
   const onChangeHandlerPassword = event => {
     const { name, value } = event.currentTarget;
@@ -50,13 +37,13 @@ const SignUp = () => {
   };
 
   const createUser = event => {
-    createUserWithEmailAndPasswordHandler(event, email, password);
-    history.push('/calendar');
+    dispatch(allActions.authActions.signup(email, password));
+    history.push('/home');
   };
 
   const logginGoogle = () => {
     try {
-      signInWithGoogle();
+      dispatch(allActions.authActions.signInGoogle());
     } catch (error) {
       toast.error(error.message);
     }

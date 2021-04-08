@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Form, Input, Divider, Tooltip } from 'antd';
 import { Toaster } from 'react-hot-toast';
 import {
@@ -9,18 +10,12 @@ import {
   InfoCircleOutlined,
 } from '@ant-design/icons';
 import Style from './StyledSignIn';
-import {
-  signInEmailAndPassword,
-  signInWithGoogle,
-} from '@firebaseConfig/firebaseAuthQueries';
+import allActions from '@store/actions';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const signInWithEmailAndPasswordHandler = (event, email, password) => {
-    signInEmailAndPassword(event, email, password);
-  };
+  const dispatch = useDispatch();
 
   const onChangeHandler = event => {
     const { name, value } = event.currentTarget;
@@ -33,11 +28,11 @@ const SignIn = () => {
   };
 
   const logginGoogle = () => {
-    signInWithGoogle();
+    dispatch(allActions.authActions.signInGoogle());
   };
 
   const logginEmailAndPassword = event => {
-    signInWithEmailAndPasswordHandler(event, email, password);
+    dispatch(allActions.authActions.signin(email, password));
   };
 
   return (
@@ -46,10 +41,10 @@ const SignIn = () => {
         <Toaster />
         <Style.Form>
           <Form>
-            <Style.Title>Google Speech</Style.Title>
+            <Style.Title>Mini paint</Style.Title>
             <Divider />
             <p>
-              Welcome to Google Speech.
+              Welcome to Mini paint.
               <br />
               Please login to your account
             </p>
