@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { Form, Input, Divider, Tooltip } from 'antd';
 import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { Link, useHistory } from 'react-router-dom';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import Style from './StyledSignUp';
 import { useDispatch } from 'react-redux';
-import allActions from '@store/actions';
+import { signUpEmail, signInGoogle } from '@store/toolkit/authSlice';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -36,17 +36,15 @@ const SignUp = () => {
     }
   };
 
-  const createUser = event => {
-    dispatch(allActions.authActions.signup(email, password));
+  const createUser = async event => {
+    // dispatch(allActions.authActions.signup(email, password));
+    event.preventDefault();
+    dispatch(signUpEmail(email, password));
     history.push('/home');
   };
 
   const logginGoogle = () => {
-    try {
-      dispatch(allActions.authActions.signInGoogle());
-    } catch (error) {
-      toast.error(error.message);
-    }
+    dispatch(signInGoogle());
   };
 
   return (

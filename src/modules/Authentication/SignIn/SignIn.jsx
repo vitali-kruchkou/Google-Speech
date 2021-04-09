@@ -10,7 +10,14 @@ import {
   InfoCircleOutlined,
 } from '@ant-design/icons';
 import Style from './StyledSignIn';
-import allActions from '@store/actions';
+import {
+  signError,
+  signIn,
+  signInEmail,
+  signInGoogle,
+} from '@store/toolkit/authSlice';
+import { signInEmailAndPassword } from '@firebaseConfig/firebaseAuthQueries';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -27,12 +34,16 @@ const SignIn = () => {
     }
   };
 
-  const logginGoogle = () => {
-    dispatch(allActions.authActions.signInGoogle());
+  const logginGoogle = async event => {
+    // dispatch(allActions.authActions.signInGoogle());
+    event.preventDefault();
+    dispatch(signInGoogle());
   };
 
-  const logginEmailAndPassword = event => {
-    dispatch(allActions.authActions.signin(email, password));
+  const logginEmailAndPassword = async event => {
+    // dispatch(allActions.authActions.signin(email, password));
+    event.preventDefault();
+    dispatch(signInEmail(email, password));
   };
 
   return (
@@ -41,10 +52,10 @@ const SignIn = () => {
         <Toaster />
         <Style.Form>
           <Form>
-            <Style.Title>Mini paint</Style.Title>
+            <Style.Title>Google Speech</Style.Title>
             <Divider />
             <p>
-              Welcome to Mini paint.
+              Welcome to Google Speech.
               <br />
               Please login to your account
             </p>

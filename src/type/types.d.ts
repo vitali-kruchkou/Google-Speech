@@ -1,3 +1,4 @@
+import { ThunkAction } from 'redux-thunk';
 import {
   SIGN_IN,
   SIGN_OUT,
@@ -5,7 +6,7 @@ import {
   SIGN_UP,
   SIGN_ERROR,
 } from 'store/actions/constans';
-
+import { Action } from '@reduxjs/toolkit';
 export type User = {
   email: any;
   uid: any;
@@ -36,3 +37,5 @@ export type AuthState = {
 };
 
 export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppThunk = ThunkAction<void, RootState, Action<string>>;

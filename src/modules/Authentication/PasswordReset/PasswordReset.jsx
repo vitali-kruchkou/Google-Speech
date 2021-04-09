@@ -4,7 +4,7 @@ import { Form, Input } from 'antd';
 import { Toaster } from 'react-hot-toast';
 import Style from './StyledPasswordReset';
 import { useDispatch } from 'react-redux';
-import allActions from '@store/actions';
+import { resetPassw } from '@store/toolkit/authSlice';
 
 const PasswordReset = () => {
   const [email, setEmail] = useState('');
@@ -17,8 +17,10 @@ const PasswordReset = () => {
     }
   };
 
-  const sendResetEmail = event => {
-    dispatch(allActions.authActions.resetPassw(email));
+  const sendResetEmail = async event => {
+    // dispatch(allActions.authActions.resetPassw(email));
+    event.preventDefault();
+    dispatch(resetPassw(email));
     setEmail('');
   };
 
