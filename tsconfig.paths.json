@@ -1,24 +1,15 @@
-// {
-//   "compilerOptions": {
-//     "baseUrl": "./src/",
-//     "paths": {
-//       "modules/*": ["modules/*"],
-//       "type/*": ["type/*"],
-//       "store/*": ["store/*"],
-//       "firebase/*": ["firebase/*"]
-//     }
-//   }
-// }
-
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "./",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@store/*": ["store/*"],
-      "@type/*": ["type/*"],
-      "@firebaseConfig/*": ["firebase/*"],
-      "@routes/*": ["routes/*"]
+      "@modules/*": ["src/modules/*"],
+      "@store/*": ["src/core/store/*"],
+      "@type/*": ["src/core/type/*"],
+      "@firebaseConfig/*": ["src/core/firebase/*"],
+      "@routes/*": ["src/core/routes/*"],
+      "@core/*": ["src/core/*"],
+      "@i18n/*": ["src/core/i18n/*"],
+      "@constants/*": ["src/core/constants/*"]
     }
   }
 }
