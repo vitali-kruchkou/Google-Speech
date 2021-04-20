@@ -7,34 +7,39 @@ import {
   signOut,
   signUpEmailAndPassword,
 } from '@firebaseConfig/firebaseAuthQueries';
+import {
+  resetPasswordAction,
+  signErrorAction,
+  signInAction,
+  signOutAction,
+  signUpAction,
+} from '@store/actions/authActions';
+import {
+  AsyncResetPasswordAction,
+  AsyncSignInAction,
+  AsyncSignUpAction,
+} from '@type/types';
 
-export function* workerAuthSignIn(args: any) {
-  const { email, password } = args.user;
+export function* workerAuthSignIn(action: AsyncSignInAction) {
+  // const { email, password } = args.user;
+  const { email, password } = action.payload;
+
   try {
     const { authChannel } = yield call(signInEmailAndPassword, email, password);
     if (authChannel) {
-      yield put({
-        type: ActionTypes.SIGN_IN,
-        payload: authChannel,
-      });
+      yield put(signInAction(authChannel));
     }
   } catch {
-    yield put({
-      type: ActionTypes.SIGN_ERROR,
-    });
+    yield put(signErrorAction());
   }
 }
 
 export const workerAuthLogOut = function* () {
   try {
     yield call(signOut);
-    yield put({
-      type: ActionTypes.SIGN_OUT,
-    });
+    yield put(signOutAction());
   } catch {
-    yield put({
-      type: ActionTypes.SIGN_ERROR,
-    });
+    yield put(signErrorAction());
   }
 };
 
@@ -42,46 +47,34 @@ export const workerAuthSignInGoogle = function* () {
   try {
     const { authChannel } = yield call(signInWithGoogle);
     if (authChannel) {
-      yield put({
-        type: ActionTypes.SIGN_IN,
-        payload: authChannel,
-      });
+      yield put(signInAction(authChannel));
     }
   } catch {
-    yield put({
-      type: ActionTypes.SIGN_ERROR,
-    });
+    yield put(signErrorAction());
   }
 };
 
-export const workerAuthSignUp = function* (args: any) {
-  const { email, password } = args.user;
+export const workerAuthSignUp = function* (action: AsyncSignUpAction) {
+  const { email, password } = action.payload;
   try {
     const { authChannel } = yield call(signUpEmailAndPassword, email, password);
     if (authChannel) {
-      yield put({
-        type: ActionTypes.SIGN_UP,
-        payload: authChannel,
-      });
+      yield put(signUpAction(authChannel));
     }
   } catch {
-    yield put({
-      type: ActionTypes.SIGN_ERROR,
-    });
+    yield put(signErrorAction());
   }
 };
 
-export const workerAuthResetPassword = function* (args: any) {
-  const { email } = args.user;
+export const workerAuthResetPassword = function* (
+  action: AsyncResetPasswordAction,
+) {
+  const { email } = action.payload;
   try {
     yield call(resetPassword, email);
-    yield put({
-      type: ActionTypes.RESET_PASSW,
-    });
+    yield put(resetPasswordAction());
   } catch {
-    yield put({
-      type: ActionTypes.SIGN_ERROR,
-    });
+    yield put(signErrorAction());
   }
 };
 

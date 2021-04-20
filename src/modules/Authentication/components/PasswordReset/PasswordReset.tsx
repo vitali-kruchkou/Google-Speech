@@ -6,7 +6,7 @@ import Style from './StyledPasswordReset';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { userEmail } from './constants';
-import { ActionTypes } from '@store/actions/constans.d';
+import { asyncResetPassword } from '@store/actions/authActions';
 
 const PasswordReset = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -23,10 +23,7 @@ const PasswordReset = (): JSX.Element => {
 
   const user = { email };
   const sendResetEmail = useCallback(() => {
-    dispatch({
-      type: ActionTypes.ASYNC_RESET_PASSWORD,
-      user,
-    });
+    dispatch(asyncResetPassword(user));
     setEmail('');
   }, [user]);
 

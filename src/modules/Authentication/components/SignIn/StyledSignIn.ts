@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Color } from '@core/constants/colors';
 
-const Style = {
+const Styled = {
   Container: styled.div`
     display: flex;
     flex-direction: column;
@@ -13,40 +13,46 @@ const Style = {
     padding-top: 20px;
   `,
   Button: styled.div`
-    width: 250px;
-    & > .ResetPas {
+    width: 200px;
+    & > .SignIn {
       width: 200px;
-      background: ${Color.purple};
-      background: linear-gradient(
-        90deg,
-        ${Color.lightPurple},
-        ${Color.pink},
-        ${Color.orange}
-      );
+      background: ${Color.AuthButton}
       border: none;
       font-size: 18px;
       height: 30px;
-      color: ${Color.white};
+      color: ${Color.AuthButtonText};
       transition: 0.4s linear;
     }
-    & > .ResetPas:hover {
-      background-color: #e1dfdf;
-      color: ${Color.black};
+    & > .SignIn:hover {
+      color: ${Color.AuthButtonTextHover};
       border: none;
+    }
+    & > .Google {
+      width: 200px;
+      background-color: ${Color.AuthGoogleButtonBackgroundColor};
+      border: none;
+      font-size: 15px;
+      height: 40px;
+      transition: 0.4s linear;
+    }
+    & > .Google:hover {
+      box-shadow: ${Color.AuthGoogleButtonHover};
+    }
+    & > .Google > span {
+      margin-left: 10px;
     }
   `,
   Form: styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 1px solid ${Color.black};
+    border: 1px solid ${Color.MainAuthBorder};
     padding: 80px;
-    box-shadow: ${Color.boxShadow};
+    box-shadow: ${Color.MainAuthBorder};
   `,
-  Title: styled.div`
+  Title: styled.span`
     font-size: 30px;
     font-style: italic;
-    padding-bottom: 30px;
   `,
   Links: styled.div`
     display: flex;
@@ -54,13 +60,11 @@ const Style = {
     text-align: center;
     justify-content: space-between;
     margin: 20px 0;
-    & > Link {
-      color: ${Color.black};
-    }
   `,
-  Accept: styled.span`
-    color: ${Color.green};
+  MainText: styled.div`
+    width: 200px;
+    text-align: center;
   `,
 };
 
-export default Style;
+export default Styled;

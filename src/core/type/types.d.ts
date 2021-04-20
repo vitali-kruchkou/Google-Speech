@@ -4,8 +4,9 @@ import { Action } from '@reduxjs/toolkit';
 import { ActionTypes } from '@store/actions/constans.d';
 
 export type User = {
-  email: string;
-  uid: string;
+  email?: string;
+  uid?: string;
+  password?: string;
 };
 
 export type AuthActions =
@@ -63,6 +64,7 @@ export interface AsyncSignUpAction {
 
 export interface AsyncResetPasswordAction {
   type: typeof ActionTypes.ASYNC_RESET_PASSWORD;
+  payload: User | null;
 }
 
 export interface AuthState {

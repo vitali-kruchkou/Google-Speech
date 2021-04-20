@@ -12,7 +12,10 @@ import Style from './StyledSignIn';
 import { useTranslation } from 'react-i18next';
 import { userEmail, userPassword } from './constants';
 import { Color } from '@core/constants/colors';
-import { ActionTypes } from '@store/actions/constans.d';
+import {
+  asyncSignInGoogle,
+  asyncSignInAction,
+} from '@store/actions/authActions';
 
 const SignIn = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -34,17 +37,12 @@ const SignIn = (): JSX.Element => {
   );
 
   const logginGoogle = useCallback(() => {
-    dispatch({
-      type: ActionTypes.ASYNC_SIGN_IN_GOOGLE,
-    });
+    dispatch(asyncSignInGoogle(user));
   }, []);
 
   const user = { email, password };
   const logginEmailAndPassword = useCallback(() => {
-    dispatch({
-      type: ActionTypes.ASYNC_SIGN_IN,
-      user,
-    });
+    dispatch(asyncSignInAction(user));
   }, [user]);
 
   return (
@@ -55,11 +53,8 @@ const SignIn = (): JSX.Element => {
           <Form>
             <Style.Title>{t('signIn.title')}</Style.Title>
             <Divider />
-            <p>
-              {t('signIn.mainText1')}
-              <br />
-              {t('signIn.mainText2')}
-            </p>
+            <Style.MainText>{t('signIn.mainText1')}</Style.MainText>
+            <Style.MainText>{t('signIn.mainText2')}</Style.MainText>
             <Divider />
             <Form.Item>
               <Input
@@ -72,7 +67,7 @@ const SignIn = (): JSX.Element => {
                 prefix={<UserOutlined />}
                 suffix={
                   <Tooltip title="Extra information">
-                    <InfoCircleOutlined style={{ color: Color.iconBlack }} />
+                    <InfoCircleOutlined style={{ color: Color.AuthFormIcon }} />
                   </Tooltip>
                 }
               />
@@ -87,7 +82,7 @@ const SignIn = (): JSX.Element => {
                 onChange={onChangeHandler}
                 suffix={
                   <Tooltip title="Extra information">
-                    <InfoCircleOutlined style={{ color: Color.iconBlack }} />
+                    <InfoCircleOutlined style={{ color: Color.AuthFormIcon }} />
                   </Tooltip>
                 }
               />

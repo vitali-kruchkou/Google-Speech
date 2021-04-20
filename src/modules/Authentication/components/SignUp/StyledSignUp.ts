@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Color } from '@core/constants/colors';
 
-const Styled = {
+const Style = {
   Container: styled.div`
     display: flex;
     flex-direction: column;
@@ -14,36 +14,29 @@ const Styled = {
   `,
   Button: styled.div`
     width: 200px;
-    & > .SignIn {
+    & > .SignUp {
       width: 200px;
-      background: ${Color.purple};
-      background: linear-gradient(
-        90deg,
-        ${Color.lightPurple},
-        ${Color.pink},
-        ${Color.orange}
-      );
+      background: ${Color.AuthButton}
       border: none;
       font-size: 18px;
       height: 30px;
-      color: ${Color.white};
+      color: ${Color.AuthButtonText};
       transition: 0.4s linear;
     }
-    & > .SignIn:hover {
-      background-color: ${Color.gray};
-      color: ${Color.black};
+    & > .SignUp:hover {
+      color: ${Color.AuthButtonTextHover};
       border: none;
     }
     & > .Google {
       width: 200px;
-      background-color: ${Color.white};
+      background-color: ${Color.AuthGoogleButtonBackgroundColor};
       border: none;
       font-size: 15px;
       height: 40px;
       transition: 0.4s linear;
     }
     & > .Google:hover {
-      box-shadow: ${Color.boxShadowHover};
+      box-shadow: ${Color.AuthGoogleButtonHover};
     }
     & > .Google > span {
       margin-left: 10px;
@@ -53,13 +46,14 @@ const Styled = {
     display: flex;
     flex-direction: column;
     text-align: center;
-    border: 1px solid ${Color.black};
+    border: 1px solid ${Color.MainAuthBorder};
     padding: 80px;
-    box-shadow: ${Color.boxShadow};
+    box-shadow: ${Color.MainAuthBorder};
   `,
-  Title: styled.span`
+  Title: styled.div`
     font-size: 30px;
     font-style: italic;
+    padding-bottom: 30px;
   `,
   Links: styled.div`
     display: flex;
@@ -67,16 +61,7 @@ const Styled = {
     text-align: center;
     justify-content: space-between;
     margin: 20px 0;
-    & > Link {
-      color: ${Color.black};
-    }
-    & > Link > .SignUp {
-      border: 1px solid ${Color.black};
-    }
-  `,
-  Error: styled.span`
-    color: ${Color.red};
   `,
 };
 
-export default Styled;
+export default Style;

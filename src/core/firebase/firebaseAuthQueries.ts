@@ -1,12 +1,12 @@
 import firebase from 'firebase';
 import toast from 'react-hot-toast';
 import { auth, generateUserDocument } from '.';
-
+import i18n from '@i18n/index';
 const provider = new firebase.auth.GoogleAuthProvider();
 
 export const resetPassword = async (email: string) => {
   const res = await auth.sendPasswordResetEmail(email);
-  toast.success('Please check your email!');
+  toast.success(`${i18n.t('toasts.resetPasswordSuccess')}`);
   return res;
 };
 
@@ -22,13 +22,13 @@ export const signInEmailAndPassword = async (
   password: string,
 ) => {
   const res = await auth.signInWithEmailAndPassword(email, password);
-  toast.success('Good!');
+  toast.success(`${i18n.t('toasts.signInSuccess')}`);
   return res;
 };
 
 export const signInWithGoogle = async () => {
   const res = await auth.signInWithPopup(provider);
-  toast.success('Good!');
+  toast.success(`${i18n.t('toasts.signInSuccess')}`);
   return res;
 };
 
@@ -37,7 +37,7 @@ export const signUpEmailAndPassword = async (
   password: string,
 ) => {
   const res = await auth.createUserWithEmailAndPassword(email, password);
-  toast.success('Create account');
+  toast.success(`${i18n.t('toasts.signUpSuccess')}`);
   return res;
 };
 

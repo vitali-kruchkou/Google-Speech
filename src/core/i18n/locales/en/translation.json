@@ -61,5 +61,16 @@
       "name": "userEmail",
       "placeholder": "Input your email"
     }
+  },
+  "signOut": {
+    "buttonSignOut": "Sign Out"
+  },
+  "text": {
+    "homeText": "Home"
+  },
+  "toasts": {
+    "signInSuccess": "Good!",
+    "signUpSuccess": "Create account",
+    "resetPasswordSuccess": "Please check your email!"
   }
 }

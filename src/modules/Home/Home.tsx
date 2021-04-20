@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { ActionTypes } from '@store/actions/constans.d';
+import { asyncSignOutAction } from '@store/actions/authActions';
+import { useTranslation } from 'react-i18next';
 
 const Home = () => {
   const dispatch = useDispatch();
-
-  const signOut = () => {
-    dispatch({
-      type: ActionTypes.ASYNC_SIGN_OUT,
-    });
-  };
+  const { t } = useTranslation();
+  const signOut = useCallback(() => {
+    dispatch(asyncSignOutAction());
+  }, []);
 
   return (
     <>
-      <h1>Home</h1>
-      <button onClick={signOut}>Sign out</button>
+      <h1>{t('text.homeText')}</h1>
+      <button onClick={signOut}>{t('signOut.buttonSignOut')}</button>
     </>
   );
 };

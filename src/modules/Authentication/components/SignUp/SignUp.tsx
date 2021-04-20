@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { AuthRoutes } from '@core/constants/routes';
 import { Color } from '@core/constants/colors';
 import { ActionTypes } from '@store/actions/constans.d';
+import { asyncSignUp } from '@store/actions/authActions';
 
 const SignUp = (): JSX.Element => {
   const [email, setEmail] = useState('');
@@ -55,10 +56,7 @@ const SignUp = (): JSX.Element => {
   const createUser = useCallback(
     (event: any) => {
       event.preventDefault();
-      dispatch({
-        type: ActionTypes.ASYNC_SIGN_UP,
-        user,
-      });
+      dispatch(asyncSignUp(user));
       history.push(AuthRoutes.home);
     },
     [user],
@@ -112,7 +110,7 @@ const SignUp = (): JSX.Element => {
               onChange={onChangeHandlerPassword}
               suffix={
                 <Tooltip title="Extra information">
-                  <InfoCircleOutlined style={{ color: Color.iconBlack }} />
+                  <InfoCircleOutlined style={{ color: Color.AuthFormIcon }} />
                 </Tooltip>
               }
             />

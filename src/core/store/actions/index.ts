@@ -1,4 +1,4 @@
-import authActions from './authActions';
+import * as authActions from './authActions';
 
 const allActions = {
   authActions,

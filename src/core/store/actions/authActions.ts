@@ -13,33 +13,33 @@ import {
   User,
 } from '@type/types';
 
-const signInAction = (user: User | null): SignInAction => {
+export const signInAction = (user: User | null): SignInAction => {
   return {
     type: ActionTypes.SIGN_IN,
     payload: user,
   };
 };
 
-const signUpAction = (user: User | null): SignUpAction => {
+export const signUpAction = (user: User | null): SignUpAction => {
   return {
     type: ActionTypes.SIGN_UP,
     payload: user,
   };
 };
 
-const signOutAction = (): SignOutAction => {
+export const signOutAction = (): SignOutAction => {
   return {
     type: ActionTypes.SIGN_OUT,
   };
 };
 
-const resetPasswordAction = (): ResetPasswordAction => {
+export const resetPasswordAction = (): ResetPasswordAction => {
   return {
     type: ActionTypes.RESET_PASSW,
   };
 };
 
-const signErrorAction = (): SignErrorAction => {
+export const signErrorAction = (): SignErrorAction => {
   return {
     type: ActionTypes.SIGN_ERROR,
   };
@@ -74,16 +74,11 @@ export const asyncSignUp = (user: User | null): AsyncSignUpAction => {
   };
 };
 
-export const asyncResetPassword = (): AsyncResetPasswordAction => {
+export const asyncResetPassword = (
+  user: User | null,
+): AsyncResetPasswordAction => {
   return {
     type: ActionTypes.ASYNC_RESET_PASSWORD,
+    payload: user,
   };
-};
-
-export default {
-  signInAction,
-  signUpAction,
-  signOutAction,
-  resetPasswordAction,
-  signErrorAction,
 };
