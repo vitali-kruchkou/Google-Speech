@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Authentication from '@modules/Authentication/Authentication';
 import Home from '@modules/Home/Home';
 import { generateUserDocument, auth } from '@firebaseConfig/';
-import { ActionTypes } from '@store/actions/constans.d';
+import { signInAction } from '@store/actions/authActions';
 
 const Routes = () => {
   const user = useSelector(state => state.currentAuth);
@@ -15,10 +15,7 @@ const Routes = () => {
     auth.onAuthStateChanged(async userAuth => {
       const user = await generateUserDocument(userAuth);
       if (user) {
-        dispatch({
-          type: ActionTypes.SIGN_IN,
-          payload: user,
-        });
+        dispatch(signInAction(user));
       }
     });
   }, []);
