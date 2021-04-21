@@ -9,6 +9,51 @@ export type User = {
   password?: string;
 };
 
+export type getWords = {
+  words?: Record<string, unknown>;
+  group?: number;
+};
+
+export type setWord = {
+  word?: Record<string, unknown>;
+  group?: number;
+};
+
+export type WordsActions =
+  | getWordsAction
+  | getWordsErrorAction
+  | setWordsAction
+  | AsyncGetWordsAction
+  | AsyncSetWordsAction
+  | AsyncGetWordsErrorAction;
+
+export interface getWordsAction {
+  type: typeof ActionTypes.GET_WORDS;
+  payload: Words | null;
+}
+
+export interface getWordsErrorAction {
+  type: typeof ActionTypes.GET_WORDS_ERROR;
+}
+
+export interface setWordsAction {
+  type: typeof ActionTypes.SET_WORDS;
+  payload: Words | null;
+}
+
+export interface AsyncSetWordsAction {
+  type: typeof ActionTypes.ASYNC_SET_WORDS;
+  payload: Words | null;
+}
+export interface AsyncGetWordsAction {
+  type: typeof ActionTypes.ASYNC_GET_WORDS;
+  payload: Words | null;
+}
+
+export interface AsyncGetWordsErrorAction {
+  type: typeof ActionTypes.ASYNC_GET_WORDS_ERROR;
+}
+
 export type AuthActions =
   | SignInAction
   | SignUpAction
@@ -70,6 +115,11 @@ export interface AsyncResetPasswordAction {
 export interface AuthState {
   login: boolean;
   user: User | null;
+}
+
+export interface WordsState {
+  words?: getWords | null;
+  word?: setWord | null;
 }
 
 export type AppDispatch = typeof store.dispatch;

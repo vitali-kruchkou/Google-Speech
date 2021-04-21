@@ -3,9 +3,9 @@ import { Toaster } from 'react-hot-toast';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Authentication from '@modules/Authentication/Authentication';
-import Home from '@modules/Home/Home';
 import { generateUserDocument, auth } from '@firebaseConfig/index';
 import { signInAction } from '@store/actions/authActions';
+import MainPage from '@modules/MainPage/MainPage';
 
 const Routes: React.FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.currentAuth);
@@ -24,7 +24,7 @@ const Routes: React.FC = () => {
     <>
       <Toaster />
       <Router>
-        <Home />
+        <MainPage />
       </Router>
     </>
   ) : (
