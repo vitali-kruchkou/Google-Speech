@@ -13,7 +13,12 @@ export const firestore = firebaseApp.firestore();
 const storage = firebaseApp.storage();
 export const storageRef = storage.ref();
 
-export const generateUserDocument = async (user: any) => {
+export const generateUserDocument = async (user: {
+  email: string;
+  displayName: string;
+  photoURL: string;
+  uid: string;
+}): Promise<{ uid: string }> => {
   if (!user) return;
 
   const userRef = firestore.doc(`users/${user.uid}`);
@@ -34,7 +39,7 @@ export const generateUserDocument = async (user: any) => {
   return getUserDocument(user.uid);
 };
 
-const getUserDocument = async (uid: any) => {
+const getUserDocument = async (uid: string) => {
   if (!uid) return null;
   try {
     const userDocument = await firestore.doc(`users/${uid}`).get();

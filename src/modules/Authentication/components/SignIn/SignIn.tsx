@@ -24,7 +24,7 @@ const SignIn = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const onChangeHandler = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget;
 
       if (name === userEmail) {

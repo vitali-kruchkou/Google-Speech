@@ -13,13 +13,16 @@ const PasswordReset = (): JSX.Element => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const onChangeHandler = useCallback((event: any) => {
-    const { name, value } = event.currentTarget;
+  const onChangeHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = event.currentTarget;
 
-    if (name === userEmail) {
-      setEmail(value);
-    }
-  }, []);
+      if (name === userEmail) {
+        setEmail(value);
+      }
+    },
+    [],
+  );
 
   const user = { email };
   const sendResetEmail = useCallback(() => {

@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { asyncSignOutAction } from '@store/actions/authActions';
 import { useTranslation } from 'react-i18next';
 
-const Home = () => {
+const Home: React.FC = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const signOut = useCallback(() => {

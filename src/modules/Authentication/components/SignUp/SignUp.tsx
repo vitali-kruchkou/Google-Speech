@@ -22,7 +22,7 @@ const SignUp = (): JSX.Element => {
   const { t } = useTranslation();
 
   const onChangeHandlerEmail = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget;
       if (name === userEmail) {
         setEmail(value);
@@ -32,7 +32,7 @@ const SignUp = (): JSX.Element => {
   );
 
   const onChangeHandlerPassword = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget;
       if (name === userPassword) {
         setPassword(value);
@@ -42,7 +42,7 @@ const SignUp = (): JSX.Element => {
   );
 
   const onChangeHandlerName = useCallback(
-    (event: any) => {
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       const { name, value } = event.currentTarget;
       if (name === displayFirstName) {
         setDisplayName(value);
@@ -54,7 +54,7 @@ const SignUp = (): JSX.Element => {
   const user = { email, password };
 
   const createUser = useCallback(
-    (event: any) => {
+    (event: React.SyntheticEvent) => {
       event.preventDefault();
       dispatch(asyncSignUp(user));
       history.push(AuthRoutes.home);

@@ -19,10 +19,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'no-console': 'off',
     'react/prop-types': 0,
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
   settings: {
     react: {

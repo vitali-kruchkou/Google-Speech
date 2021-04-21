@@ -9,7 +9,7 @@ import { AsyncResetPasswordAction } from '@type/types';
 
 export const workerAuthResetPassword = function* (
   action: AsyncResetPasswordAction,
-) {
+): Generator {
   const { email } = action.payload;
   try {
     yield call(resetPassword, email);
@@ -19,6 +19,6 @@ export const workerAuthResetPassword = function* (
   }
 };
 
-export default function* watchAuthResetPassword() {
+export default function* watchAuthResetPassword(): Generator {
   yield takeLatest(ActionTypes.ASYNC_RESET_PASSWORD, workerAuthResetPassword);
 }

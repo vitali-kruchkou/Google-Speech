@@ -5,7 +5,7 @@ import watchAuthSignInGoogle from './authSaga/signInGoogleSaga';
 import watchAuthSignIn from './authSaga/signInSaga';
 import watchAuthSignUp from './authSaga/signUpSaga';
 
-export default function* rootSaga() {
+export default function* rootSaga(): Generator {
   yield all([
     watchAuthResetPassword(),
     watchAuthSignIn(),
