@@ -1,64 +1,61 @@
-import React, { useState } from 'react';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { asyncSetWordsActions } from '@store/actions/wordsActions';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  asyncGetWordsActions,
+  asyncSetWordsActions,
+} from '@store/actions/wordsActions';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from 'react-speech-recognition';
+import { useTranslation } from 'react-i18next';
 
 const SpeechRecording: React.FC = () => {
   const dispatch = useDispatch();
-  const getWord = useSelector(
-    (state: RootStateOrAny) => state.currentWords.words,
+  const { transcript, resetTranscript } = useSpeechRecognition();
+  const microphoneRef = useRef(null);
+  const { t } = useTranslation();
+  const getWordsGroup = useCallback(
+    group => {
+      dispatch(asyncGetWordsActions(group));
+    },
+    [dispatch],
   );
-
-  const [scope, setScope] = useState(0);
-
-  const SpeechRecognition =
-    (window as any).SpeechRecognition ||
-    (window as any).webkitSpeechRecognition;
-  const SpeechGrammarList =
-    (window as any).SpeechGrammarList ||
-    (window as any).webkitSpeechGrammarList;
-  const lists: any[] = [];
-
-  if (getWord) {
-    for (let i = 0; i < getWord.length; i++) {
-      lists.push(getWord[i].word);
+  useEffect(() => {
+    if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+      alert(`${t('SpeechRecording.notBrowserSupportSpeechRecording')}`);
     }
-  }
-
-  const grammar =
-    '#JSGF V1.0; grammar moods; public <moods> = ' + lists.join(' | ') + ';';
-  console.log(grammar);
-
-  const recognition = new SpeechRecognition();
-  const recognitionList = new SpeechGrammarList();
-  recognitionList.addFromString(grammar, 1);
-  recognition.grammars = recognitionList;
-  recognition.lang = 'en-US';
-  recognition.continuous = false;
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+  }, []);
 
   const renderSpeech = () => {
-    recognition.start();
-    recognition.onresult = (event: any) => {
-      const word = event.results[0][0].transcript;
-      dispatch(asyncSetWordsActions(word));
-      if (lists.includes(word)) {
-        const firstNumber = Number(getWord[0].group);
-        const number = ((10 + firstNumber) / 10) * 1;
-        setScope(scope + number);
-      } else {
-        console.log('false');
-      }
-    };
+    microphoneRef.current.classList.add('listening');
+    SpeechRecognition.startListening({ language: 'en-US' });
   };
+
+  const stopHandle = () => {
+    microphoneRef.current.classList.remove('listening');
+    SpeechRecognition.stopListening();
+  };
+
+  const handleReset = () => {
+    stopHandle();
+    resetTranscript();
+    getWordsGroup(0);
+  };
+
+  useEffect(() => {
+    dispatch(asyncSetWordsActions(transcript));
+  }, [transcript]);
 
   return (
     <>
       <div>
-        <h1>Speech</h1>
-        <button onClick={renderSpeech}>Press to Talk</button>
+        <button onClick={renderSpeech} ref={microphoneRef}>
+          {t('SpeechRecording.buttonSpeak')}
+        </button>
+        <button onClick={handleReset}>
+          {t('SpeechRecording.buttonReset')}
+        </button>
       </div>
-      {console.log(scope)}
     </>
   );
 };

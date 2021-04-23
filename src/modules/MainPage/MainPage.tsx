@@ -1,15 +1,12 @@
 import { asyncSignOutAction } from '@store/actions/authActions';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import Score from './Score/Score';
 import SpeechRecording from './SpeechRecording/SpeechRecording';
-import Words from './Words/Words';
+import WordsList from './WordsList/WordsList';
 
 const MainPage: React.FC = () => {
-  const getWord = useSelector(
-    (state: RootStateOrAny) => state.currentWords.word,
-  );
-
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -19,11 +16,10 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <h1>{t('text.homeText')}</h1>
+      <Score />
       <button onClick={signOut}>{t('signOut.buttonSignOut')}</button>
-      <Words />
+      <WordsList />
       <SpeechRecording />
-      {console.log(getWord)}
     </>
   );
 };

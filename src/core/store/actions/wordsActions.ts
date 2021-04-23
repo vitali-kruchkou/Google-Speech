@@ -40,7 +40,7 @@ export const asyncGetWordsActions = (
 };
 
 export const asyncSetWordsActions = (
-  word: setWord | null,
+  word: string | setWord | null,
 ): AsyncSetWordsAction => {
   return {
     type: ActionTypes.ASYNC_SET_WORDS,
