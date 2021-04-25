@@ -9,6 +9,51 @@ export type User = {
   password?: string;
 };
 
+export type GetWords = {
+  words?: Record<string, unknown>;
+  group?: number;
+};
+
+export type SetWord = {
+  word?: Record<string, unknown>;
+  group?: number;
+};
+
+export type WordsActions =
+  | GetWordsAction
+  | GetWordsErrorAction
+  | SetWordsAction
+  | AsyncGetWordsAction
+  | AsyncSetWordsAction
+  | AsyncGetWordsErrorAction;
+
+export interface GetWordsAction {
+  type: typeof ActionTypes.GET_WORDS;
+  payload: GetWords | null;
+}
+
+export interface GetWordsErrorAction {
+  type: typeof ActionTypes.GET_WORDS_ERROR;
+}
+
+export interface SetWordsAction {
+  type: typeof ActionTypes.SET_WORDS;
+  payload: SetWord | null;
+}
+
+export interface AsyncSetWordsAction {
+  type: typeof ActionTypes.ASYNC_SET_WORDS;
+  payload: SetWord | null | Array;
+}
+export interface AsyncGetWordsAction {
+  type: typeof ActionTypes.ASYNC_GET_WORDS;
+  payload: GetWords | null;
+}
+
+export interface AsyncGetWordsErrorAction {
+  type: typeof ActionTypes.ASYNC_GET_WORDS_ERROR;
+}
+
 export type AuthActions =
   | SignInAction
   | SignUpAction

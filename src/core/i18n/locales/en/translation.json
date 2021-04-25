@@ -72,5 +72,25 @@
     "signInSuccess": "Good!",
     "signUpSuccess": "Create account",
     "resetPasswordSuccess": "Please check your email!"
+  },
+  "Score": {
+    "mainTetx": "Scope",
+    "addScore": "Good"
+  },
+  "WordList": {
+    "waitText": "Please, waiting"
+  },
+  "GroupsWord": {
+    "Group0": "Words 0",
+    "Group1": "Words 1",
+    "Group2": "Words 2",
+    "Group3": "Words 3",
+    "Group4": "Words 4",
+    "Group5": "Words 5"
+  },
+  "SpeechRecording": {
+    "buttonSpeak": "Speak please",
+    "buttonReset": "Reset",
+    "notBrowserSupportSpeechRecording": "Ups, your browser is not supported!"
   }
 }
