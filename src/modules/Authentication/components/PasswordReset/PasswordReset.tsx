@@ -24,11 +24,11 @@ const PasswordReset = (): JSX.Element => {
     [],
   );
 
-  const user = { email };
   const sendResetEmail = useCallback(() => {
+    const user = { email };
     dispatch(asyncResetPassword(user));
     setEmail('');
-  }, [user]);
+  }, [dispatch, email]);
 
   return (
     <Style.Container>

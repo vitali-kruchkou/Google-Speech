@@ -9,6 +9,7 @@ module.exports = function override(config) {
     '@core': 'src/core',
     '@i18n': 'src/core/i18n',
     '@constants': 'src/core/constants',
+    '@assets': 'src/assets',
   })(config);
 
   return config;
