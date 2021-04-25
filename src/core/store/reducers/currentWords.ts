@@ -1,8 +1,14 @@
+import { ActionTypes } from '@store/actions/constans.d';
+import { GetWords, SetWord, WordsActions } from '@type/types';
+
+export interface WordsState {
+  words?: GetWords | null;
+  setWord?: SetWord | null;
+}
+
 const initialState: WordsState = {
   words: null as null,
 };
-import { ActionTypes } from '@store/actions/constans.d';
-import { WordsActions, WordsState } from '@type/types';
 
 const currentWords = (
   state: WordsState = initialState,
@@ -18,7 +24,7 @@ const currentWords = (
     case ActionTypes.SET_WORDS: {
       return {
         ...state,
-        word: action.payload,
+        setWord: action.payload,
       };
     }
     default:

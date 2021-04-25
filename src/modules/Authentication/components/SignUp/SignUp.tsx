@@ -28,7 +28,7 @@ const SignUp = (): JSX.Element => {
         setEmail(value);
       }
     },
-    [email],
+    [],
   );
 
   const onChangeHandlerPassword = useCallback(
@@ -38,7 +38,7 @@ const SignUp = (): JSX.Element => {
         setPassword(value);
       }
     },
-    [password],
+    [],
   );
 
   const onChangeHandlerName = useCallback(
@@ -48,18 +48,17 @@ const SignUp = (): JSX.Element => {
         setDisplayName(value);
       }
     },
-    [displayName],
+    [],
   );
-
-  const user = { email, password };
 
   const createUser = useCallback(
     (event: React.SyntheticEvent) => {
+      const user = { email, password };
       event.preventDefault();
       dispatch(asyncSignUp(user));
       history.push(AuthRoutes.home);
     },
-    [user],
+    [dispatch, history, email, password],
   );
 
   const logginGoogle = useCallback(() => {
@@ -70,7 +69,7 @@ const SignUp = (): JSX.Element => {
     } catch (error) {
       toast.error(error.message);
     }
-  }, []);
+  }, [dispatch]);
 
   return (
     <Style.Container>

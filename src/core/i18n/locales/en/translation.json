@@ -74,7 +74,8 @@
     "resetPasswordSuccess": "Please check your email!"
   },
   "Score": {
-    "mainTetx": "Scope"
+    "mainTetx": "Scope",
+    "addScore": "Good"
   },
   "WordList": {
     "waitText": "Please, waiting"

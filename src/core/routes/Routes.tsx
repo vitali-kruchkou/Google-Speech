@@ -18,7 +18,7 @@ const Routes: React.FC = () => {
         dispatch(signInAction(user));
       }
     });
-  }, []);
+  }, [dispatch]);
 
   return user.login ? (
     <>

@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  asyncGetWordsActions,
-  asyncSetWordsActions,
+  AsyncGetWordsActions,
+  AsyncSetWordsActions,
 } from '@store/actions/wordsActions';
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -16,7 +16,7 @@ const SpeechRecording: React.FC = () => {
   const { t } = useTranslation();
   const getWordsGroup = useCallback(
     group => {
-      dispatch(asyncGetWordsActions(group));
+      dispatch(AsyncGetWordsActions(group));
     },
     [dispatch],
   );
@@ -24,27 +24,27 @@ const SpeechRecording: React.FC = () => {
     if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
       alert(`${t('SpeechRecording.notBrowserSupportSpeechRecording')}`);
     }
-  }, []);
+  }, [t]);
 
-  const renderSpeech = () => {
+  const renderSpeech = useCallback(() => {
     microphoneRef.current.classList.add('listening');
     SpeechRecognition.startListening({ language: 'en-US' });
-  };
+  }, []);
 
-  const stopHandle = () => {
+  const stopHandle = useCallback(() => {
     microphoneRef.current.classList.remove('listening');
     SpeechRecognition.stopListening();
-  };
+  }, []);
 
-  const handleReset = () => {
+  const handleReset = useCallback(() => {
     stopHandle();
     resetTranscript();
     getWordsGroup(0);
-  };
+  }, [getWordsGroup, resetTranscript, stopHandle]);
 
   useEffect(() => {
-    dispatch(asyncSetWordsActions(transcript));
-  }, [transcript]);
+    dispatch(AsyncSetWordsActions(transcript));
+  }, [dispatch, transcript]);
 
   return (
     <>

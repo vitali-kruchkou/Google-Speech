@@ -1,33 +1,40 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 import { ActionTypes } from '@store/actions/constans.d';
 import {
-  getWordsActions,
-  getWordsErrorActions,
+  GetWordsActions,
+  GetWordsErrorActions,
 } from '@store/actions/wordsActions';
 import { AsyncGetWordsAction } from '@type/types';
+import { wordsUrl } from './constants';
 
 export const fetchWordsAsync = function* (
   action: AsyncGetWordsAction,
 ): Generator {
   try {
     const group = action.payload;
-    const words: any = yield call(() => {
+    const maxGroupNumber = 30;
+    const minGroupNumber = 0;
+    const wordsFetch = yield call(() => {
       const page =
-        Math.floor(Math.random() * (Math.floor(30) - Math.ceil(0))) +
-        Math.ceil(0);
-      const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
+        Math.floor(
+          Math.random() *
+            (Math.floor(maxGroupNumber) - Math.ceil(minGroupNumber)),
+        ) + Math.ceil(minGroupNumber);
+      const url = wordsUrl + `page=${page}` + `&group=${group}`;
       return fetch(url).then(res => res.json());
     });
-
+    const maxWordCount = 10;
+    const words = Object.values(wordsFetch);
     const numbers = new Set();
-    while (numbers.size < 10) {
-      const items = words[Math.floor(Math.random() * words.length)];
+    while (numbers.size < maxWordCount) {
+      const randomWord = Math.floor(Math.random() * words.length);
+      const items = words[randomWord];
       numbers.add(items);
     }
     const arr: unknown = Array.from(numbers);
-    yield put(getWordsActions(arr));
+    yield put(GetWordsActions(arr));
   } catch {
-    yield put(getWordsErrorActions());
+    yield put(GetWordsErrorActions());
   }
 };
 

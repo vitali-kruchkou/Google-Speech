@@ -12,7 +12,7 @@ const MainPage: React.FC = () => {
 
   const signOut = useCallback(() => {
     dispatch(asyncSignOutAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

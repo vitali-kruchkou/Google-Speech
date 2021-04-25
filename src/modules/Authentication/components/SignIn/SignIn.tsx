@@ -33,17 +33,18 @@ const SignIn = (): JSX.Element => {
         setPassword(value);
       }
     },
-    [email, password],
+    [],
   );
 
   const logginGoogle = useCallback(() => {
+    const user = { email, password };
     dispatch(asyncSignInGoogle(user));
-  }, []);
+  }, [email, password, dispatch]);
 
-  const user = { email, password };
   const logginEmailAndPassword = useCallback(() => {
+    const user = { email, password };
     dispatch(asyncSignInAction(user));
-  }, [user]);
+  }, [dispatch, email, password]);
 
   return (
     <>

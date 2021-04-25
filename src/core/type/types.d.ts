@@ -9,45 +9,45 @@ export type User = {
   password?: string;
 };
 
-export type getWords = {
+export type GetWords = {
   words?: Record<string, unknown>;
   group?: number;
 };
 
-export type setWord = {
+export type SetWord = {
   word?: Record<string, unknown>;
   group?: number;
 };
 
 export type WordsActions =
-  | getWordsAction
-  | getWordsErrorAction
-  | setWordsAction
+  | GetWordsAction
+  | GetWordsErrorAction
+  | SetWordsAction
   | AsyncGetWordsAction
   | AsyncSetWordsAction
   | AsyncGetWordsErrorAction;
 
-export interface getWordsAction {
+export interface GetWordsAction {
   type: typeof ActionTypes.GET_WORDS;
-  payload: Words | null;
+  payload: GetWords | null;
 }
 
-export interface getWordsErrorAction {
+export interface GetWordsErrorAction {
   type: typeof ActionTypes.GET_WORDS_ERROR;
 }
 
-export interface setWordsAction {
+export interface SetWordsAction {
   type: typeof ActionTypes.SET_WORDS;
-  payload: Words | null;
+  payload: SetWord | null;
 }
 
 export interface AsyncSetWordsAction {
   type: typeof ActionTypes.ASYNC_SET_WORDS;
-  payload: Words | null;
+  payload: SetWord | null | Array;
 }
 export interface AsyncGetWordsAction {
   type: typeof ActionTypes.ASYNC_GET_WORDS;
-  payload: Words | null;
+  payload: GetWords | null;
 }
 
 export interface AsyncGetWordsErrorAction {
@@ -115,11 +115,6 @@ export interface AsyncResetPasswordAction {
 export interface AuthState {
   login: boolean;
   user: User | null;
-}
-
-export interface WordsState {
-  words?: getWords | null;
-  word?: setWord | null;
 }
 
 export type AppDispatch = typeof store.dispatch;

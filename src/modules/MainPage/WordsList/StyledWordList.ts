@@ -33,7 +33,7 @@ const Style = {
     width: 200px;
     max-height: 100px;
     border: 1px solid gray;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     display: flex;
     flex-direction: row;
     align-items: center;

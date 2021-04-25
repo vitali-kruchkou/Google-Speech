@@ -1,90 +1,109 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, MouseEvent } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { asyncGetWordsActions } from '@store/actions/wordsActions';
-import { audioUrl, imageUrl, startImageUrl } from './constants';
+import { AsyncGetWordsActions } from '@store/actions/wordsActions';
+import { Group, wordsURL } from './constants';
 import Style from './StyledWordList';
 import { SoundOutlined } from '@ant-design/icons';
-import { useTranslation } from 'react-i18next';
 
 const WordsList: React.FC = () => {
-  useEffect(() => {
-    getWordsGroup(0);
-  }, []);
-
-  const [words, setWords] = useState([]);
-  const [image, setImage] = useState(startImageUrl);
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const easyGroup = 0;
+  const Groups = [0, 1, 2, 3, 4, 5];
+
   const getWordsGroup = useCallback(
     group => {
-      dispatch(asyncGetWordsActions(group));
+      dispatch(AsyncGetWordsActions(group));
     },
     [dispatch],
   );
 
+  useEffect(() => {
+    getWordsGroup(easyGroup);
+  }, [getWordsGroup]);
+
+  const [words, setWords] = useState([]);
+  const [image, setImage] = useState<string>(wordsURL.startImageUrl);
+  const [Buttons] = useState(Groups);
+
   const getWordsFetch = useSelector(
     (state: RootStateOrAny) => state.currentWords.words,
+  );
+
+  const speechWord = useSelector(
+    (state: RootStateOrAny) => state.currentWords.word,
   );
 
   useEffect(() => {
     setWords(getWordsFetch);
   }, [getWordsFetch]);
 
-  const audioPlay = useCallback((url: string) => {
-    const audio = new Audio(audioUrl + url);
+  const audioPlay = useCallback(url => {
+    const audio = new Audio(wordsURL.audioUrl + url);
     audio.play();
   }, []);
 
-  const handlerButton = useCallback(
-    (url: { image: string; audio: string }) => {
-      const { image } = url;
-      setImage(imageUrl + image);
+  const getImages = useCallback(
+    image => {
+      setImage(wordsURL.imageUrl + image);
     },
     [setImage],
+  );
+
+  const handlerButtonsGroups = useCallback(
+    (group: number) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      getWordsGroup(group);
+    },
+    [getWordsGroup],
+  );
+
+  const handlerImagesButtons = useCallback(
+    (image: string) => (event: MouseEvent<HTMLDivElement>) => {
+      event.preventDefault();
+      getImages(image);
+    },
+    [getImages],
+  );
+
+  const handlerAudioButtons = useCallback(
+    (audio: string) => (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      audioPlay(audio);
+    },
+    [audioPlay],
   );
 
   return (
     <>
       <Style.Container>
         <Style.Groups>
-          <button onClick={() => getWordsGroup(0)}>
-            {t('GroupsWord.Group0')}
-          </button>
-          <button onClick={() => getWordsGroup(1)}>
-            {t('GroupsWord.Group1')}
-          </button>
-          <button onClick={() => getWordsGroup(2)}>
-            {t('GroupsWord.Group2')}
-          </button>
-          <button onClick={() => getWordsGroup(3)}>
-            {t('GroupsWord.Group3')}
-          </button>
-          <button onClick={() => getWordsGroup(4)}>
-            {t('GroupsWord.Group4')}
-          </button>
-          <button onClick={() => getWordsGroup(5)}>
-            {t('GroupsWord.Group5')}
-          </button>
+          {Buttons.map(i => {
+            return (
+              <button key={i} onClick={handlerButtonsGroups(i)}>
+                {Group[i]}
+              </button>
+            );
+          })}
         </Style.Groups>
         <Style.MainImage>
           <img src={image} />
         </Style.MainImage>
         <Style.WordsContainer>
-          {words !== null ? (
-            words.map(function (res, i) {
+          {words &&
+            words.map((res, i) => {
               return (
-                <Style.Words key={i} onClick={() => handlerButton(res)}>
-                  <SoundOutlined onClick={() => audioPlay(res.audio)} />
+                <Style.Words
+                  key={i}
+                  onClick={handlerImagesButtons(res.image)}
+                  className={speechWord == res.word ? 'Active' : undefined}>
+                  <SoundOutlined onClick={handlerAudioButtons(res.audio)} />
                   <Style.WordsText>
                     <p>{res.word}</p>
                     <p>{res.transcription}</p>
                   </Style.WordsText>
                 </Style.Words>
               );
-            })
-          ) : (
-            <div> {t('WordList.waitText')}</div>
-          )}
+            })}
         </Style.WordsContainer>
       </Style.Container>
     </>
