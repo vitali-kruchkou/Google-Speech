@@ -1,13 +1,26 @@
 import { ActionTypes } from '@store/actions/constans.d';
-import { GetWords, SetWord, WordsActions } from '@type/types';
+import {
+  AllWords,
+  GetWords,
+  QuessedWords,
+  SetWord,
+  UnpredictableWords,
+  WordsActions,
+} from '@type/types';
 
-export interface WordsState {
-  words?: GetWords | null;
+export interface WordsState<T = []> {
+  words?: GetWords | null | Array<T>;
   setWord?: SetWord | null;
+  allWords?: AllWords;
+  quessedWords: QuessedWords | null | any;
+  unpredWords: UnpredictableWords | null | any;
 }
 
 const initialState: WordsState = {
-  words: null as null,
+  words: [],
+  allWords: [],
+  quessedWords: [],
+  unpredWords: [],
 };
 
 const currentWords = (
@@ -25,6 +38,33 @@ const currentWords = (
       return {
         ...state,
         setWord: action.payload,
+      };
+    }
+    case ActionTypes.ALL_WORDS_SESSION: {
+      return {
+        ...state,
+        allWords: [...state.allWords, action.payload].flat(),
+        // allWords: [...state.allWords, ...(action.payload || [])],
+      };
+    }
+    case ActionTypes.CLEAR_WORDS: {
+      return {
+        ...state,
+        allWords: [],
+        quessedWords: [],
+        unpredWords: [],
+      };
+    }
+    case ActionTypes.QUESSED_WORDS: {
+      return {
+        ...state,
+        quessedWords: action.payload,
+      };
+    }
+    case ActionTypes.UNPREDICTABLE_WORDS: {
+      return {
+        ...state,
+        unpredWords: action.payload,
       };
     }
     default:

@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Authentication from '@modules/Authentication/Authentication';
 import { generateUserDocument, auth } from '@firebaseConfig/index';
 import { signInAction } from '@store/actions/authActions';
-import MainPage from '@modules/MainPage/MainPage';
+import HomePage from '@modules/HomePage/HomePage';
 
 const Routes: React.FC = () => {
   const user = useSelector((state: RootStateOrAny) => state.currentAuth);
@@ -24,7 +24,7 @@ const Routes: React.FC = () => {
     <>
       <Toaster />
       <Router>
-        <MainPage />
+        <HomePage />
       </Router>
     </>
   ) : (

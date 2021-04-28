@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState, MouseEvent } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { AsyncGetWordsActions } from '@store/actions/wordsActions';
+import {
+  AsyncAllWordsFromSessionActions,
+  AsyncGetWordsActions,
+} from '@store/actions/wordsActions';
 import { Group, wordsURL } from './constants';
 import Style from './StyledWordList';
 import { SoundOutlined } from '@ant-design/icons';
@@ -35,7 +38,30 @@ const WordsList: React.FC = () => {
 
   useEffect(() => {
     setWords(getWordsFetch);
-  }, [getWordsFetch]);
+    if (getWordsFetch) {
+      dispatch(
+        AsyncAllWordsFromSessionActions(
+          getWordsFetch.map((res: Record<string, unknown>) => res),
+        ),
+      );
+    }
+    console.log('useEffetc');
+  }, [getWordsFetch, dispatch]);
+
+  // const getAllWords = useSelector(
+  //   (state: RootStateOrAny) => state.currentWords.allWords,
+  // );
+
+  // useEffect(() => {
+  //   if (getAllWords.length === 0) {
+  //     dispatch(
+  //       AsyncAllWordsFromSessionActions(
+  //         getWordsFetch.map((res: Record<string, unknown>) => res),
+  //       ),
+  //     );
+  //   }
+  //   console.log('useEffetc');
+  // }, [dispatch, getAllWords.length, getWordsFetch]);
 
   const audioPlay = useCallback(url => {
     const audio = new Audio(wordsURL.audioUrl + url);

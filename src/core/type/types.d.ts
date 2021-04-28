@@ -19,13 +19,33 @@ export type SetWord = {
   group?: number;
 };
 
+// export type AllWords = {
+//   allWords: Array<WordsObject>;
+//   group?: number;
+// };
+
+export type AllWords = Array<WordsObject>;
+
+export type QuessedWords = {
+  quessedWords: Record<string, unknown>;
+};
+
+export type UnpredictableWords = {
+  unpredWords: Array;
+};
+
 export type WordsActions =
   | GetWordsAction
   | GetWordsErrorAction
-  | SetWordsAction
+  | SetWordAction
   | AsyncGetWordsAction
-  | AsyncSetWordsAction
-  | AsyncGetWordsErrorAction;
+  | AsyncSetWordAction
+  | AsyncGetWordsErrorAction
+  | AllWordsFromSessionAction
+  | AsyncAllWordsFromSessionAction
+  | ClearWordsAction
+  | SetQuessedWordsAction
+  | SetUnpredictableWordsAction;
 
 export interface GetWordsAction {
   type: typeof ActionTypes.GET_WORDS;
@@ -36,12 +56,17 @@ export interface GetWordsErrorAction {
   type: typeof ActionTypes.GET_WORDS_ERROR;
 }
 
-export interface SetWordsAction {
+export interface SetWordAction {
   type: typeof ActionTypes.SET_WORDS;
   payload: SetWord | null;
 }
 
-export interface AsyncSetWordsAction {
+export interface AllWordsFromSessionAction {
+  type: typeof ActionTypes.ALL_WORDS_SESSION;
+  payload: AllWords | null;
+}
+
+export interface AsyncSetWordAction {
   type: typeof ActionTypes.ASYNC_SET_WORDS;
   payload: SetWord | null | Array;
 }
@@ -52,6 +77,24 @@ export interface AsyncGetWordsAction {
 
 export interface AsyncGetWordsErrorAction {
   type: typeof ActionTypes.ASYNC_GET_WORDS_ERROR;
+}
+
+export interface AsyncAllWordsFromSessionAction {
+  type: typeof ActionTypes.ASYNC_ALL_WORDS_SESSION;
+  payload: AllWords | null;
+}
+
+export interface ClearWordsAction {
+  type: typeof ActionTypes.CLEAR_WORDS;
+}
+
+export interface SetQuessedWordsAction {
+  type: typeof ActionTypes.QUESSED_WORDS;
+  payload: QuessedWords | null;
+}
+export interface SetUnpredictableWordsAction {
+  type: typeof ActionTypes.UNPREDICTABLE_WORDS;
+  payload: UnpredictableWords | null;
 }
 
 export type AuthActions =
@@ -115,6 +158,24 @@ export interface AsyncResetPasswordAction {
 export interface AuthState {
   login: boolean;
   user: User | null;
+}
+
+export interface WordsObject {
+  audio: string;
+  audioExample: string;
+  audioMeaning: string;
+  group: number;
+  id: string;
+  image: string;
+  page: number;
+  textExample: string;
+  textExampleTranslate: string;
+  textMeaning: string;
+  textMeaningTranslate: string;
+  transcription: string;
+  word: string;
+  wordTranslate: string;
+  wordsPerExampleSentence: number;
 }
 
 export type AppDispatch = typeof store.dispatch;

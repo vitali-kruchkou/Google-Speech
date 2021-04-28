@@ -1,12 +1,20 @@
 import {
   AsyncGetWordsAction,
   AsyncGetWordsErrorAction,
-  AsyncSetWordsAction,
+  AsyncSetWordAction,
   GetWords,
   GetWordsAction,
   GetWordsErrorAction,
-  SetWordsAction,
+  SetWordAction,
   SetWord,
+  AllWords,
+  AllWordsFromSessionAction,
+  AsyncAllWordsFromSessionAction,
+  ClearWordsAction,
+  QuessedWords,
+  SetQuessedWordsAction,
+  SetUnpredictableWordsAction,
+  UnpredictableWords,
 } from '@type/types.d';
 import { ActionTypes } from './constans.d';
 
@@ -15,9 +23,16 @@ export const GetWordsActions = (words: GetWords | null): GetWordsAction => ({
   payload: words,
 });
 
-export const SetWordsActions = (word: SetWord | null): SetWordsAction => ({
+export const SetWordActions = (word: SetWord | null): SetWordAction => ({
   type: ActionTypes.SET_WORDS,
   payload: word,
+});
+
+export const AllWordsFromSessionActions = (
+  allWords: AllWords | null,
+): AllWordsFromSessionAction => ({
+  type: ActionTypes.ALL_WORDS_SESSION,
+  payload: allWords,
 });
 
 export const GetWordsErrorActions = (): GetWordsErrorAction => ({
@@ -31,13 +46,38 @@ export const AsyncGetWordsActions = (
   payload: words,
 });
 
-export const AsyncSetWordsActions = (
+export const AsyncSetWordActions = (
   setWord: string | SetWord | null,
-): AsyncSetWordsAction => ({
+): AsyncSetWordAction => ({
   type: ActionTypes.ASYNC_SET_WORDS,
   payload: setWord,
 });
 
+export const AsyncAllWordsFromSessionActions = (
+  allWords: AllWords | null,
+): AsyncAllWordsFromSessionAction => ({
+  type: ActionTypes.ASYNC_ALL_WORDS_SESSION,
+  payload: allWords,
+});
+
 export const AsyncGetWordsErrorActions = (): AsyncGetWordsErrorAction => ({
   type: ActionTypes.ASYNC_GET_WORDS_ERROR,
+});
+
+export const ClearWordsActions = (): ClearWordsAction => ({
+  type: ActionTypes.CLEAR_WORDS,
+});
+
+export const SetGuessedWordsActions = (
+  quessedWords: QuessedWords | null | any,
+): SetQuessedWordsAction => ({
+  type: ActionTypes.QUESSED_WORDS,
+  payload: quessedWords,
+});
+
+export const SetUnpredictableWordsActions = (
+  unpredWords: UnpredictableWords | null | any,
+): SetUnpredictableWordsAction => ({
+  type: ActionTypes.UNPREDICTABLE_WORDS,
+  payload: unpredWords,
 });
