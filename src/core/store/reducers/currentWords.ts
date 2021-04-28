@@ -1,3 +1,4 @@
+import { ScoreType } from './../../type/types.d';
 import { ActionTypes } from '@store/actions/constans.d';
 import {
   AllWords,
@@ -6,21 +7,34 @@ import {
   SetWord,
   UnpredictableWords,
   WordsActions,
+  WordsObject,
 } from '@type/types';
 
-export interface WordsState<T = []> {
-  words?: GetWords | null | Array<T>;
-  setWord?: SetWord | null;
-  allWords?: AllWords;
-  quessedWords: QuessedWords | null | any;
-  unpredWords: UnpredictableWords | null | any;
+export interface WordsState {
+  words: GetWords | null | any;
+  setWord: SetWord;
+  allWords: AllWords;
+  quessedWords: QuessedWords;
+  unpredWords: UnpredictableWords;
+  score: ScoreType;
 }
 
+// export interface WordsState {
+//   words?: GetWords | null | any;
+//   setWord?: SetWord | null;
+//   allWords?: AllWords;
+//   quessedWords: QuessedWords;
+//   unpredWords: UnpredictableWords | null | any;
+//   score: ScoreType;
+// }
+
 const initialState: WordsState = {
-  words: [],
   allWords: [],
+  words: [],
   quessedWords: [],
   unpredWords: [],
+  setWord: '',
+  score: null as null,
 };
 
 const currentWords = (
@@ -43,8 +57,18 @@ const currentWords = (
     case ActionTypes.ALL_WORDS_SESSION: {
       return {
         ...state,
-        allWords: [...state.allWords, action.payload].flat(),
-        // allWords: [...state.allWords, ...(action.payload || [])],
+        // allWords: [...state.allWords, action.payload].flat(),
+        allWords: [
+          ...state.allWords,
+          ...(action.payload || [])
+            .flat()
+            .filter(
+              (item: WordsObject) =>
+                !state.allWords.some(
+                  (elem: WordsObject) => item.id === elem.id,
+                ),
+            ),
+        ],
       };
     }
     case ActionTypes.CLEAR_WORDS: {
@@ -58,13 +82,27 @@ const currentWords = (
     case ActionTypes.QUESSED_WORDS: {
       return {
         ...state,
-        quessedWords: action.payload,
+        quessedWords: [
+          ...state.quessedWords,
+          ...(action.payload || []).filter(
+            (item: WordsObject) =>
+              !state.quessedWords.some(
+                (elem: WordsObject) => item.id === elem.id,
+              ),
+          ),
+        ],
       };
     }
     case ActionTypes.UNPREDICTABLE_WORDS: {
       return {
         ...state,
         unpredWords: action.payload,
+      };
+    }
+    case ActionTypes.SET_SCORE: {
+      return {
+        ...state,
+        score: action.payload,
       };
     }
     default:

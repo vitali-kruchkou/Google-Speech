@@ -1,3 +1,4 @@
+import { ScoreType } from './types.d';
 import { ThunkAction } from 'redux-thunk';
 
 import { Action } from '@reduxjs/toolkit';
@@ -10,29 +11,19 @@ export type User = {
 };
 
 export type GetWords = {
-  words?: Record<string, unknown>;
+  words?: Array<WordsObject>;
   group?: number;
 };
 
-export type SetWord = {
-  word?: Record<string, unknown>;
-  group?: number;
-};
-
-// export type AllWords = {
-//   allWords: Array<WordsObject>;
-//   group?: number;
-// };
+export type SetWord = string;
 
 export type AllWords = Array<WordsObject>;
 
-export type QuessedWords = {
-  quessedWords: Record<string, unknown>;
-};
+export type QuessedWords = Array<WordsObject>;
 
-export type UnpredictableWords = {
-  unpredWords: Array;
-};
+export type UnpredictableWords = Array<WordsObject>;
+
+export type ScoreType = number | string;
 
 export type WordsActions =
   | GetWordsAction
@@ -45,7 +36,8 @@ export type WordsActions =
   | AsyncAllWordsFromSessionAction
   | ClearWordsAction
   | SetQuessedWordsAction
-  | SetUnpredictableWordsAction;
+  | SetUnpredictableWordsAction
+  | SetScoreAction;
 
 export interface GetWordsAction {
   type: typeof ActionTypes.GET_WORDS;
@@ -95,6 +87,11 @@ export interface SetQuessedWordsAction {
 export interface SetUnpredictableWordsAction {
   type: typeof ActionTypes.UNPREDICTABLE_WORDS;
   payload: UnpredictableWords | null;
+}
+
+export interface SetScoreAction {
+  type: typeof ActionTypes.SET_SCORE;
+  payload: ScoreType;
 }
 
 export type AuthActions =

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   AsyncGetWordsActions,
   AsyncSetWordActions,
@@ -15,6 +15,7 @@ const SpeechRecording: React.FC = () => {
   const { transcript, resetTranscript } = useSpeechRecognition();
   const microphoneRef = useRef(null);
   const { t } = useTranslation();
+
   const getWordsGroup = useCallback(
     group => {
       dispatch(AsyncGetWordsActions(group));
@@ -37,10 +38,6 @@ const SpeechRecording: React.FC = () => {
     SpeechRecognition.stopListening();
   }, []);
 
-  const getAllWords = useSelector(
-    (state: RootStateOrAny) => state.currentWords.allWords,
-  );
-
   const handleReset = useCallback(() => {
     stopHandle();
     resetTranscript();
@@ -49,7 +46,7 @@ const SpeechRecording: React.FC = () => {
   }, [getWordsGroup, resetTranscript, stopHandle, dispatch]);
 
   useEffect(() => {
-    dispatch(AsyncSetWordActions(transcript));
+    dispatch(AsyncSetWordActions(transcript.toLocaleLowerCase()));
   }, [dispatch, transcript]);
 
   return (

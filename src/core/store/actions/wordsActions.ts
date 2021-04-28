@@ -15,6 +15,8 @@ import {
   SetQuessedWordsAction,
   SetUnpredictableWordsAction,
   UnpredictableWords,
+  ScoreType,
+  SetScoreAction,
 } from '@type/types.d';
 import { ActionTypes } from './constans.d';
 
@@ -69,15 +71,20 @@ export const ClearWordsActions = (): ClearWordsAction => ({
 });
 
 export const SetGuessedWordsActions = (
-  quessedWords: QuessedWords | null | any,
+  quessedWords: QuessedWords | null,
 ): SetQuessedWordsAction => ({
   type: ActionTypes.QUESSED_WORDS,
   payload: quessedWords,
 });
 
 export const SetUnpredictableWordsActions = (
-  unpredWords: UnpredictableWords | null | any,
+  unpredWords: UnpredictableWords | null,
 ): SetUnpredictableWordsAction => ({
   type: ActionTypes.UNPREDICTABLE_WORDS,
   payload: unpredWords,
+});
+
+export const SetScoreActions = (score: ScoreType): SetScoreAction => ({
+  type: ActionTypes.SET_SCORE,
+  payload: score,
 });

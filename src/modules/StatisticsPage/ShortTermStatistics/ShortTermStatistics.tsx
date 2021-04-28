@@ -4,10 +4,11 @@ import { SoundOutlined } from '@ant-design/icons';
 import { wordsURL } from '@modules/HomePage/WordsList/constants';
 import { useHistory } from 'react-router';
 
-const ShortTermStatistics = () => {
+const ShortTermStatistics: React.FC = () => {
   const [guessedWords, setGuessedWords] = useState([]);
   const [unpredWords, setUnpredWords] = useState([]);
   const history = useHistory();
+
   const getAllQuessedWords = useSelector(
     (state: RootStateOrAny) => state.currentWords.quessedWords,
   );
@@ -44,7 +45,7 @@ const ShortTermStatistics = () => {
 
   return (
     <>
-      <button onClick={hanlderBackButton}>Back</button>
+      <button onClick={hanlderBackButton}>Return</button>
       <h1>{unpredWords.length}</h1>
       <div>
         {unpredWords &&

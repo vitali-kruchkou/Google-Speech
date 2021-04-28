@@ -10,7 +10,6 @@ import { SoundOutlined } from '@ant-design/icons';
 
 const WordsList: React.FC = () => {
   const dispatch = useDispatch();
-  const easyGroup = 0;
   const Groups = [0, 1, 2, 3, 4, 5];
 
   const getWordsGroup = useCallback(
@@ -20,9 +19,9 @@ const WordsList: React.FC = () => {
     [dispatch],
   );
 
-  useEffect(() => {
-    getWordsGroup(easyGroup);
-  }, [getWordsGroup]);
+  // useEffect(() => {
+  //   getWordsGroup(easyGroup);
+  // }, [getWordsGroup]);
 
   const [words, setWords] = useState([]);
   const [image, setImage] = useState<string>(wordsURL.startImageUrl);
@@ -130,6 +129,11 @@ const WordsList: React.FC = () => {
                 </Style.Words>
               );
             })}
+          {!words.length && (
+            <div>
+              If you ready play this game, please, check the group! Good Luck!
+            </div>
+          )}
         </Style.WordsContainer>
       </Style.Container>
     </>
