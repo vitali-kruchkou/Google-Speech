@@ -9,6 +9,8 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 import { useTranslation } from 'react-i18next';
+import Style from './StyledSpeechRecording';
+import { Button } from 'antd';
 
 const SpeechRecording: React.FC = () => {
   const dispatch = useDispatch();
@@ -51,14 +53,18 @@ const SpeechRecording: React.FC = () => {
 
   return (
     <>
-      <div>
-        <button onClick={renderSpeech} ref={microphoneRef}>
-          {t('SpeechRecording.buttonSpeak')}
-        </button>
-        <button onClick={handleReset}>
+      <Style.Buttons>
+        <Button type="primary" onClick={handleReset}>
           {t('SpeechRecording.buttonReset')}
-        </button>
-      </div>
+        </Button>
+        <Button
+          type="primary"
+          onClick={renderSpeech}
+          ref={microphoneRef}
+          id="buttonSpeak">
+          {t('SpeechRecording.buttonSpeak')}
+        </Button>
+      </Style.Buttons>
     </>
   );
 };

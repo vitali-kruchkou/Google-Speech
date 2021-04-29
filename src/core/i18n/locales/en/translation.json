@@ -92,5 +92,14 @@
     "buttonSpeak": "Speak please",
     "buttonReset": "Reset",
     "notBrowserSupportSpeechRecording": "Ups, your browser is not supported!"
+  },
+  "Statistics": {
+    "unpredWords": "Количество неправильных ответов ",
+    "guessedWords": "Количество правильный ответов "
+  },
+  "StartPage": {
+    "HeaderText": "Speakit",
+    "MainText": "Click on the words to hear them sound. Click on the button and speak the words into the microphone.",
+    "buttonStart": "Start"
   }
 }

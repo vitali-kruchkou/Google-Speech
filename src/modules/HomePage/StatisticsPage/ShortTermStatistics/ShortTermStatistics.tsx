@@ -3,11 +3,15 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { SoundOutlined } from '@ant-design/icons';
 import { wordsURL } from '@modules/HomePage/WordsList/constants';
 import { useHistory } from 'react-router';
+import Style from './StyledShortTermStatistics';
+import { useTranslation } from 'react-i18next';
+import { Button } from 'antd';
 
 const ShortTermStatistics: React.FC = () => {
   const [guessedWords, setGuessedWords] = useState([]);
   const [unpredWords, setUnpredWords] = useState([]);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const getAllQuessedWords = useSelector(
     (state: RootStateOrAny) => state.currentWords.quessedWords,
@@ -43,35 +47,56 @@ const ShortTermStatistics: React.FC = () => {
     [history],
   );
 
+  const hanlderStatisticsButton = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      history.push('/LongTermStatistics');
+    },
+    [history],
+  );
+
   return (
     <>
-      <button onClick={hanlderBackButton}>Return</button>
-      <h1>{unpredWords.length}</h1>
-      <div>
+      <Style.Buttons>
+        <Button type="primary" onClick={hanlderBackButton}>
+          Return
+        </Button>
+        <Button type="primary" onClick={hanlderStatisticsButton}>
+          Statistics
+        </Button>
+      </Style.Buttons>
+      <h1>
+        {t('Statistics.unpredWords')}
+        <Style.UnpredWords>{unpredWords.length}</Style.UnpredWords>
+      </h1>
+      <Style.Container>
         {unpredWords &&
           unpredWords.map((res, i) => {
             return (
-              <div key={i}>
+              <Style.Words key={i}>
                 <SoundOutlined onClick={handlerAudioButtons(res.audio)} />
                 <p>{res.word}</p>
                 <p>{res.transcription}</p>
-              </div>
+              </Style.Words>
             );
           })}
-      </div>
-      <h1>{guessedWords.length}</h1>
-      <div>
+      </Style.Container>
+      <h1>
+        {t('Statistics.guessedWords')}
+        <Style.GuessedWords>{guessedWords.length}</Style.GuessedWords>
+      </h1>
+      <Style.Container>
         {guessedWords &&
           guessedWords.map((res, i) => {
             return (
-              <div key={i}>
+              <Style.Words key={i}>
                 <SoundOutlined onClick={handlerAudioButtons(res.audio)} />
                 <p>{res.word}</p>
                 <p>{res.transcription}</p>
-              </div>
+              </Style.Words>
             );
           })}
-      </div>
+      </Style.Container>
     </>
   );
 };

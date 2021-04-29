@@ -9,6 +9,8 @@ import {
   SetScoreActions,
   SetUnpredictableWordsActions,
 } from '@store/actions/wordsActions';
+import Style from './StyledScore';
+
 const Score: React.FC = () => {
   const getAllQuessedWords = useSelector(
     (state: RootStateOrAny) => state.currentWords.quessedWords,
@@ -30,8 +32,8 @@ const Score: React.FC = () => {
     (state: RootStateOrAny) => state.currentWords.score,
   );
 
-  const [score, setScore] = useState(getAllScore);
-  const [word, setWord] = useState('');
+  const [score, setScore] = useState(0);
+  const [word, setWord] = useState(getAllScore);
   const [unpredWords, setUnpredWords] = useState([]);
   const [guessedWords, setGuessedWords] = useState([]);
   const { t } = useTranslation();
@@ -67,9 +69,13 @@ const Score: React.FC = () => {
         if (item.word === word.toLocaleLowerCase()) {
           const fractionalPart = Number(getWordsFetch[0].group);
           const wholePart = 10;
-          const numberOfPoints = (wholePart + fractionalPart) / wholePart;
+          const numberOfPoints = (
+            (wholePart + fractionalPart) /
+            wholePart
+          ).toFixed(1);
           setScore(
-            (prevNumberOfPoints: number) => prevNumberOfPoints + numberOfPoints,
+            (prevNumberOfPoints: number) =>
+              Number(prevNumberOfPoints) + Number(numberOfPoints),
           );
           toast.success(`${i18n.t('Score.addScore')}`);
         }
@@ -86,9 +92,9 @@ const Score: React.FC = () => {
   return (
     <>
       <Toaster />
-      <h1>
+      <Style.Maintext>
         {t('Score.mainTetx')}: {score}
-      </h1>
+      </Style.Maintext>
     </>
   );
 };

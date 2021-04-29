@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Color } from '@constants/colors';
 
 const Style = {
   Container: styled.div`
@@ -32,7 +33,7 @@ const Style = {
     margin: 0 auto;
     width: 200px;
     max-height: 100px;
-    border: 1px solid gray;
+    border: ${Color.WordsBorder};
     border-radius: 10px;
     display: flex;
     flex-direction: row;
@@ -42,7 +43,6 @@ const Style = {
   WordsText: styled.div`
     width: 100px;
     text-align: center;
-    border: 1px solid black;
   `,
 };
 

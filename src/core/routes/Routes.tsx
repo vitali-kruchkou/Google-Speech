@@ -3,7 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Authentication from '@modules/Authentication/Authentication';
-import { generateUserDocument, auth } from '@firebaseConfig/index';
+import { generateUserDocument, auth, database } from '@firebaseConfig/index';
 import { signInAction } from '@store/actions/authActions';
 import HomePage from '@modules/HomePage/HomePage';
 
@@ -16,6 +16,7 @@ const Routes: React.FC = () => {
       const user = await generateUserDocument(userAuth);
       if (user) {
         dispatch(signInAction(user));
+        database.ref().child('users').child(`${user.uid}`).set(user);
       }
     });
   }, [dispatch]);

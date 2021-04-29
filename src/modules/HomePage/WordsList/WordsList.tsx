@@ -7,10 +7,12 @@ import {
 import { Group, wordsURL } from './constants';
 import Style from './StyledWordList';
 import { SoundOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 const WordsList: React.FC = () => {
   const dispatch = useDispatch();
   const Groups = [0, 1, 2, 3, 4, 5];
+  const easyGroup = 0;
 
   const getWordsGroup = useCallback(
     group => {
@@ -19,9 +21,9 @@ const WordsList: React.FC = () => {
     [dispatch],
   );
 
-  // useEffect(() => {
-  //   getWordsGroup(easyGroup);
-  // }, [getWordsGroup]);
+  useEffect(() => {
+    getWordsGroup(easyGroup);
+  }, [getWordsGroup]);
 
   const [words, setWords] = useState([]);
   const [image, setImage] = useState<string>(wordsURL.startImageUrl);
@@ -44,23 +46,7 @@ const WordsList: React.FC = () => {
         ),
       );
     }
-    console.log('useEffetc');
   }, [getWordsFetch, dispatch]);
-
-  // const getAllWords = useSelector(
-  //   (state: RootStateOrAny) => state.currentWords.allWords,
-  // );
-
-  // useEffect(() => {
-  //   if (getAllWords.length === 0) {
-  //     dispatch(
-  //       AsyncAllWordsFromSessionActions(
-  //         getWordsFetch.map((res: Record<string, unknown>) => res),
-  //       ),
-  //     );
-  //   }
-  //   console.log('useEffetc');
-  // }, [dispatch, getAllWords.length, getWordsFetch]);
 
   const audioPlay = useCallback(url => {
     const audio = new Audio(wordsURL.audioUrl + url);
@@ -104,9 +90,9 @@ const WordsList: React.FC = () => {
         <Style.Groups>
           {Buttons.map(i => {
             return (
-              <button key={i} onClick={handlerButtonsGroups(i)}>
+              <Button key={i} onClick={handlerButtonsGroups(i)}>
                 {Group[i]}
-              </button>
+              </Button>
             );
           })}
         </Style.Groups>
@@ -129,11 +115,6 @@ const WordsList: React.FC = () => {
                 </Style.Words>
               );
             })}
-          {!words.length && (
-            <div>
-              If you ready play this game, please, check the group! Good Luck!
-            </div>
-          )}
         </Style.WordsContainer>
       </Style.Container>
     </>

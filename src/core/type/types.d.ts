@@ -12,7 +12,6 @@ export type User = {
 
 export type GetWords = {
   words?: Array<WordsObject>;
-  group?: number;
 };
 
 export type SetWord = string;

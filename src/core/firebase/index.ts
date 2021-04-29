@@ -2,6 +2,7 @@ import firebase from '@firebase/app';
 import '@firebase/auth';
 import '@firebase/storage';
 import '@firebase/firestore';
+import '@firebase/database';
 import config from './firebaseConfig';
 
 const firebaseApp = !firebase.apps.length
@@ -12,6 +13,7 @@ export const auth = firebaseApp.auth();
 export const firestore = firebaseApp.firestore();
 const storage = firebaseApp.storage();
 export const storageRef = storage.ref();
+export const database = firebaseApp.database();
 
 export const generateUserDocument = async (user: {
   email: string;

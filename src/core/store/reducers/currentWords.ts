@@ -11,22 +11,13 @@ import {
 } from '@type/types';
 
 export interface WordsState {
-  words: GetWords | null | any;
+  words: GetWords | [];
   setWord: SetWord;
   allWords: AllWords;
   quessedWords: QuessedWords;
   unpredWords: UnpredictableWords;
   score: ScoreType;
 }
-
-// export interface WordsState {
-//   words?: GetWords | null | any;
-//   setWord?: SetWord | null;
-//   allWords?: AllWords;
-//   quessedWords: QuessedWords;
-//   unpredWords: UnpredictableWords | null | any;
-//   score: ScoreType;
-// }
 
 const initialState: WordsState = {
   allWords: [],
@@ -75,8 +66,11 @@ const currentWords = (
       return {
         ...state,
         allWords: [],
+        words: [],
         quessedWords: [],
         unpredWords: [],
+        setWord: '',
+        score: null as null,
       };
     }
     case ActionTypes.QUESSED_WORDS: {
