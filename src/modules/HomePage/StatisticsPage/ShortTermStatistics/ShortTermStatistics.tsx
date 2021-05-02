@@ -6,13 +6,13 @@ import { useHistory } from 'react-router';
 import Style from './StyledShortTermStatistics';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
+import { MainRoutes } from '@core/constants/routes';
 
 const ShortTermStatistics: React.FC = () => {
   const [guessedWords, setGuessedWords] = useState([]);
   const [unpredWords, setUnpredWords] = useState([]);
   const history = useHistory();
   const { t } = useTranslation();
-
   const getAllQuessedWords = useSelector(
     (state: RootStateOrAny) => state.currentWords.quessedWords,
   );
@@ -42,7 +42,7 @@ const ShortTermStatistics: React.FC = () => {
   const hanlderBackButton = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      history.push('/MainPage');
+      history.push(MainRoutes.mainPage);
     },
     [history],
   );
@@ -50,7 +50,7 @@ const ShortTermStatistics: React.FC = () => {
   const hanlderStatisticsButton = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      history.push('/LongTermStatistics');
+      history.push(MainRoutes.longTermStatistics);
     },
     [history],
   );
@@ -59,10 +59,10 @@ const ShortTermStatistics: React.FC = () => {
     <>
       <Style.Buttons>
         <Button type="primary" onClick={hanlderBackButton}>
-          Return
+          {t('ShortStatistics.buttonReset')}
         </Button>
         <Button type="primary" onClick={hanlderStatisticsButton}>
-          Statistics
+          {t('ShortStatistics.buttonStatistics')}
         </Button>
       </Style.Buttons>
       <h1>
@@ -71,9 +71,9 @@ const ShortTermStatistics: React.FC = () => {
       </h1>
       <Style.Container>
         {unpredWords &&
-          unpredWords.map((res, i) => {
+          unpredWords.map(res => {
             return (
-              <Style.Words key={i}>
+              <Style.Words key={res.id}>
                 <SoundOutlined onClick={handlerAudioButtons(res.audio)} />
                 <p>{res.word}</p>
                 <p>{res.transcription}</p>

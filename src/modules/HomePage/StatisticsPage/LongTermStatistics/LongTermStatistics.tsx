@@ -3,10 +3,13 @@ import { useHistory } from 'react-router';
 import { database } from '@firebaseConfig/index';
 import Style from './StyledLongTermStatistics';
 import { Button } from 'antd';
+import { MainRoutes } from '@core/constants/routes';
+import { useTranslation } from 'react-i18next';
 
 const LongTermStatistics: React.FC = () => {
   const [info, setInfo] = useState([]);
   const history = useHistory();
+  const { t } = useTranslation();
 
   useEffect(() => {
     database
@@ -17,12 +20,22 @@ const LongTermStatistics: React.FC = () => {
       });
   }, []);
 
-  info.sort((a, b) => (a.score > b.score ? -1 : 1));
+  const sorted = [...info].sort((a, b) => {
+    return b.score - a.score;
+  });
+
+  const handlerSortButtons = useCallback(
+    (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      setInfo(sorted);
+    },
+    [sorted],
+  );
 
   const hanlderBackButton = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      history.push('/ShortTermStatistics');
+      history.push(MainRoutes.shortTermStatistics);
     },
     [history],
   );
@@ -30,15 +43,18 @@ const LongTermStatistics: React.FC = () => {
   return (
     <>
       <Button type="primary" onClick={hanlderBackButton}>
-        Return
+        {t('LongStatistics.buttonReturn')}
+      </Button>
+      <Button onClick={handlerSortButtons}>
+        {t('LongStatistics.sortByScore')}
       </Button>
       <Style.UsersTable>
         <tr>
-          <td>№</td>
-          <td>email</td>
-          <td>displayName</td>
-          <td>score</td>
-          <td>date</td>
+          <tr>{t('LongStatistics.position')}</tr>
+          <th>{t('LongStatistics.email')}</th>
+          <th>{t('LongStatistics.displayName')}</th>
+          <th>{t('LongStatistics.score')}</th>
+          <th>{t('LongStatistics.date')}</th>
         </tr>
         {info.map(
           (
@@ -53,7 +69,7 @@ const LongTermStatistics: React.FC = () => {
             i: number,
           ) => {
             return (
-              <tr key={i}>
+              <tr key={res.uid}>
                 <td>{++i}</td>
                 <td>{res.email}</td>
                 <td>{res.displayName}</td>

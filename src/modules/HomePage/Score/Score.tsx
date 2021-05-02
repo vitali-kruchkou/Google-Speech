@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
-import i18n from '@i18n/index';
 import { WordsObject } from '@type/types';
 import {
   SetGuessedWordsActions,
@@ -46,6 +45,7 @@ const Score: React.FC = () => {
           !getAllQuessedWords.some((elem: WordsObject) => elem === item),
       ),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [getAllWords, guessedWords]);
 
   useEffect(() => {
@@ -61,6 +61,7 @@ const Score: React.FC = () => {
     setUnpredWords(
       unpredWords.filter((elem: WordsObject) => !guessedWords.includes(elem)),
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [guessedWords]);
 
   useEffect(() => {
@@ -77,11 +78,11 @@ const Score: React.FC = () => {
             (prevNumberOfPoints: number) =>
               Number(prevNumberOfPoints) + Number(numberOfPoints),
           );
-          toast.success(`${i18n.t('Score.addScore')}`);
+          toast.success(`${t('Score.addScore')}`);
         }
       }
     });
-  }, [getWordsFetch, unpredWords, word]);
+  }, [getWordsFetch, t, unpredWords, word]);
 
   useEffect(() => {
     dispatch(SetGuessedWordsActions(guessedWords));

@@ -10,6 +10,7 @@ import { database } from '@firebaseConfig/index';
 import { ClearWordsActions } from '@store/actions/wordsActions';
 import Style from './StyledMainPage';
 import { Button } from 'antd';
+import { MainRoutes } from '@core/constants/routes';
 
 const MainPage: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const MainPage: React.FC = () => {
       .child('users')
       .child(`${user.uid}`)
       .on('value', snapshot => {
-        if (snapshot.val().score === undefined) {
+        if (snapshot.val().score) {
           setDbScore(Number(startScore));
         }
         if (snapshot.val().score !== undefined) {
@@ -47,7 +48,7 @@ const MainPage: React.FC = () => {
   const handleResultsButton = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      history.push('/ShortTermStatistics');
+      history.push(MainRoutes.shortTermStatistics);
       const now = new Date().toLocaleString();
       database
         .ref()

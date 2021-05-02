@@ -28,7 +28,6 @@ const WordsList: React.FC = () => {
   const [words, setWords] = useState([]);
   const [image, setImage] = useState<string>(wordsURL.startImageUrl);
   const [Buttons] = useState(Groups);
-
   const getWordsFetch = useSelector(
     (state: RootStateOrAny) => state.currentWords.words,
   );
@@ -88,9 +87,9 @@ const WordsList: React.FC = () => {
     <>
       <Style.Container>
         <Style.Groups>
-          {Buttons.map(i => {
+          {Buttons.map((res, i) => {
             return (
-              <Button key={i} onClick={handlerButtonsGroups(i)}>
+              <Button key={res} onClick={handlerButtonsGroups(i)}>
                 {Group[i]}
               </Button>
             );

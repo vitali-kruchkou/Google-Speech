@@ -48,7 +48,6 @@ const currentWords = (
     case ActionTypes.ALL_WORDS_SESSION: {
       return {
         ...state,
-        // allWords: [...state.allWords, action.payload].flat(),
         allWords: [
           ...state.allWords,
           ...(action.payload || [])

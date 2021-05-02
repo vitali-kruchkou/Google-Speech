@@ -101,5 +101,18 @@
     "HeaderText": "Speakit",
     "MainText": "Click on the words to hear them sound. Click on the button and speak the words into the microphone.",
     "buttonStart": "Start"
+  },
+  "LongStatistics": {
+    "position": "№",
+    "email": "email",
+    "displayName": "displayName",
+    "score": "score",
+    "date": "date",
+    "buttonReturn": "Return",
+    "sortByScore": "Sort by score"
+  },
+  "ShortStatistics": {
+    "buttonReset": "Reset",
+    "buttonStatistics": "Statistics"
   }
 }
