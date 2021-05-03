@@ -1,14 +1,18 @@
 import React, { useCallback, useEffect, useState, MouseEvent } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { AsyncGetWordsActions } from '@store/actions/wordsActions';
+import {
+  AsyncAllWordsFromSessionActions,
+  AsyncGetWordsActions,
+} from '@store/actions/wordsActions';
 import { Group, wordsURL } from './constants';
 import Style from './StyledWordList';
 import { SoundOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 const WordsList: React.FC = () => {
   const dispatch = useDispatch();
-  const easyGroup = 0;
   const Groups = [0, 1, 2, 3, 4, 5];
+  const easyGroup = 0;
 
   const getWordsGroup = useCallback(
     group => {
@@ -24,7 +28,6 @@ const WordsList: React.FC = () => {
   const [words, setWords] = useState([]);
   const [image, setImage] = useState<string>(wordsURL.startImageUrl);
   const [Buttons] = useState(Groups);
-
   const getWordsFetch = useSelector(
     (state: RootStateOrAny) => state.currentWords.words,
   );
@@ -35,7 +38,14 @@ const WordsList: React.FC = () => {
 
   useEffect(() => {
     setWords(getWordsFetch);
-  }, [getWordsFetch]);
+    if (getWordsFetch) {
+      dispatch(
+        AsyncAllWordsFromSessionActions(
+          getWordsFetch.map((res: Record<string, unknown>) => res),
+        ),
+      );
+    }
+  }, [getWordsFetch, dispatch]);
 
   const audioPlay = useCallback(url => {
     const audio = new Audio(wordsURL.audioUrl + url);
@@ -77,11 +87,11 @@ const WordsList: React.FC = () => {
     <>
       <Style.Container>
         <Style.Groups>
-          {Buttons.map(i => {
+          {Buttons.map((res, i) => {
             return (
-              <button key={i} onClick={handlerButtonsGroups(i)}>
+              <Button key={res} onClick={handlerButtonsGroups(i)}>
                 {Group[i]}
-              </button>
+              </Button>
             );
           })}
         </Style.Groups>

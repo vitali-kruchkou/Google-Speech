@@ -2,18 +2,22 @@ import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   AsyncGetWordsActions,
-  AsyncSetWordsActions,
+  AsyncSetWordActions,
+  ClearWordsActions,
 } from '@store/actions/wordsActions';
 import SpeechRecognition, {
   useSpeechRecognition,
 } from 'react-speech-recognition';
 import { useTranslation } from 'react-i18next';
+import Style from './StyledSpeechRecording';
+import { Button } from 'antd';
 
 const SpeechRecording: React.FC = () => {
   const dispatch = useDispatch();
   const { transcript, resetTranscript } = useSpeechRecognition();
   const microphoneRef = useRef(null);
   const { t } = useTranslation();
+
   const getWordsGroup = useCallback(
     group => {
       dispatch(AsyncGetWordsActions(group));
@@ -40,22 +44,27 @@ const SpeechRecording: React.FC = () => {
     stopHandle();
     resetTranscript();
     getWordsGroup(0);
-  }, [getWordsGroup, resetTranscript, stopHandle]);
+    dispatch(ClearWordsActions());
+  }, [getWordsGroup, resetTranscript, stopHandle, dispatch]);
 
   useEffect(() => {
-    dispatch(AsyncSetWordsActions(transcript));
+    dispatch(AsyncSetWordActions(transcript.toLocaleLowerCase()));
   }, [dispatch, transcript]);
 
   return (
     <>
-      <div>
-        <button onClick={renderSpeech} ref={microphoneRef}>
-          {t('SpeechRecording.buttonSpeak')}
-        </button>
-        <button onClick={handleReset}>
+      <Style.Buttons>
+        <Button type="primary" onClick={handleReset}>
           {t('SpeechRecording.buttonReset')}
-        </button>
-      </div>
+        </Button>
+        <Button
+          type="primary"
+          onClick={renderSpeech}
+          ref={microphoneRef}
+          id="buttonSpeak">
+          {t('SpeechRecording.buttonSpeak')}
+        </Button>
+      </Style.Buttons>
     </>
   );
 };
