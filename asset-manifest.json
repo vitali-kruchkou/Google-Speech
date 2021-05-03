@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.2b2fb3dd.chunk.css",
+    "main.js": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/main.d83980de.chunk.js",
+    "main.js.map": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/main.d83980de.chunk.js.map",
+    "runtime-main.js": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/runtime-main.0a396ce9.js",
+    "runtime-main.js.map": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/runtime-main.0a396ce9.js.map",
+    "static/css/2.a5497ee8.chunk.css": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/2.a5497ee8.chunk.css",
+    "static/js/2.60ad451b.chunk.js": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/2.60ad451b.chunk.js",
+    "static/js/2.60ad451b.chunk.js.map": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/2.60ad451b.chunk.js.map",
+    "index.html": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/index.html",
+    "static/css/2.a5497ee8.chunk.css.map": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/2.a5497ee8.chunk.css.map",
+    "static/css/main.2b2fb3dd.chunk.css.map": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.2b2fb3dd.chunk.css.map",
+    "static/js/2.60ad451b.chunk.js.LICENSE.txt": "/vitali-kruchkou/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/2.60ad451b.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0a396ce9.js",
+    "static/css/2.a5497ee8.chunk.css",
+    "static/js/2.60ad451b.chunk.js",
+    "static/css/main.2b2fb3dd.chunk.css",
+    "static/js/main.d83980de.chunk.js"
+  ]
+}
