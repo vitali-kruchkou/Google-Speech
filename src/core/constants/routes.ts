@@ -4,3 +4,10 @@ export enum AuthRoutes {
   passwordReset = '/passwordReset',
   home = '/home',
 }
+
+export enum MainRoutes {
+  shortTermStatistics = '/ShortTermStatistics',
+  longTermStatistics = '/LongTermStatistics',
+  mainPage = '/MainPage',
+  startPage = '/StartPage',
+}

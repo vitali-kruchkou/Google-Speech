@@ -2,15 +2,15 @@ import { put, takeLatest } from '@redux-saga/core/effects';
 import { ActionTypes } from '@store/actions/constans.d';
 import {
   GetWordsErrorActions,
-  SetWordsActions,
+  SetWordActions,
 } from '@store/actions/wordsActions';
-import { AsyncSetWordsAction } from '@type/types';
+import { AsyncSetWordAction } from '@type/types';
 
 export const workerSetWordsAsync = function* (
-  action: AsyncSetWordsAction,
+  action: AsyncSetWordAction,
 ): Generator {
   try {
-    yield put(SetWordsActions(action.payload));
+    yield put(SetWordActions(action.payload));
   } catch {
     yield put(GetWordsErrorActions());
   }
