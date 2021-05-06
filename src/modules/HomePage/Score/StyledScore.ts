@@ -5,7 +5,7 @@ const Style = {
     text-algin: center;
     max-width: 210px;
     margin: 0 auto;
-    font-size: 30px;
+    font-size: 25px;
     text-align: center;
   `,
 };

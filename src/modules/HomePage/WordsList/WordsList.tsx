@@ -6,7 +6,7 @@ import {
 } from '@store/actions/wordsActions';
 import { Group, wordsURL } from './constants';
 import Style from './StyledWordList';
-import { SoundOutlined } from '@ant-design/icons';
+import { SoundOutlined, CommentOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 const WordsList: React.FC = () => {
@@ -28,13 +28,26 @@ const WordsList: React.FC = () => {
   const [words, setWords] = useState([]);
   const [image, setImage] = useState<string>(wordsURL.startImageUrl);
   const [Buttons] = useState(Groups);
+
   const getWordsFetch = useSelector(
     (state: RootStateOrAny) => state.currentWords.words,
   );
 
   const speechWord = useSelector(
-    (state: RootStateOrAny) => state.currentWords.word,
+    (state: RootStateOrAny) => state.currentWords.setWord,
   );
+
+  const [spokenWord, setSpokenWord] = useState('');
+
+  const getAllQuessedWords = useSelector(
+    (state: RootStateOrAny) => state.currentWords.quessedWords,
+  );
+
+  useEffect(() => {
+    if (speechWord) {
+      setSpokenWord(speechWord);
+    }
+  }, [speechWord]);
 
   useEffect(() => {
     setWords(getWordsFetch);
@@ -98,6 +111,10 @@ const WordsList: React.FC = () => {
         <Style.MainImage>
           <img src={image} />
         </Style.MainImage>
+        <Style.SpokenWord>
+          <CommentOutlined />
+          <span>{spokenWord}</span>
+        </Style.SpokenWord>
         <Style.WordsContainer>
           {words &&
             words.map((res, i) => {
@@ -105,7 +122,9 @@ const WordsList: React.FC = () => {
                 <Style.Words
                   key={i}
                   onClick={handlerImagesButtons(res.image)}
-                  className={speechWord == res.word ? 'Active' : undefined}>
+                  className={
+                    getAllQuessedWords.includes(res) ? 'Active' : undefined
+                  }>
                   <SoundOutlined onClick={handlerAudioButtons(res.audio)} />
                   <Style.WordsText>
                     <p>{res.word}</p>

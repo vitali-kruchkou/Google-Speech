@@ -112,7 +112,7 @@
     "sortByScore": "Sort by score"
   },
   "ShortStatistics": {
-    "buttonReset": "Reset",
+    "buttonReturn": "Return",
     "buttonStatistics": "Statistics"
   }
 }

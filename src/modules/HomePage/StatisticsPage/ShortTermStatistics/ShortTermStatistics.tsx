@@ -13,6 +13,7 @@ const ShortTermStatistics: React.FC = () => {
   const [unpredWords, setUnpredWords] = useState([]);
   const history = useHistory();
   const { t } = useTranslation();
+
   const getAllQuessedWords = useSelector(
     (state: RootStateOrAny) => state.currentWords.quessedWords,
   );
@@ -59,7 +60,7 @@ const ShortTermStatistics: React.FC = () => {
     <>
       <Style.Buttons>
         <Button type="primary" onClick={hanlderBackButton}>
-          {t('ShortStatistics.buttonReset')}
+          {t('ShortStatistics.buttonReturn')}
         </Button>
         <Button type="primary" onClick={hanlderStatisticsButton}>
           {t('ShortStatistics.buttonStatistics')}
