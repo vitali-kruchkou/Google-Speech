@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.f75171e0.chunk.css",
+    "main.css": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.2b2fb3dd.chunk.css",
     "main.js": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/main.95534d78.chunk.js",
     "main.js.map": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/main.95534d78.chunk.js.map",
     "runtime-main.js": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/runtime-main.5b7727db.js",
@@ -10,14 +10,14 @@
     "static/js/2.ea84775d.chunk.js.map": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/2.ea84775d.chunk.js.map",
     "index.html": "/Innowise-Lab-Internship-Level-1-Google-Speech/index.html",
     "static/css/2.a5497ee8.chunk.css.map": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/2.a5497ee8.chunk.css.map",
-    "static/css/main.f75171e0.chunk.css.map": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.f75171e0.chunk.css.map",
+    "static/css/main.2b2fb3dd.chunk.css.map": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/css/main.2b2fb3dd.chunk.css.map",
     "static/js/2.ea84775d.chunk.js.LICENSE.txt": "/Innowise-Lab-Internship-Level-1-Google-Speech/static/js/2.ea84775d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.5b7727db.js",
     "static/css/2.a5497ee8.chunk.css",
     "static/js/2.ea84775d.chunk.js",
-    "static/css/main.f75171e0.chunk.css",
+    "static/css/main.2b2fb3dd.chunk.css",
     "static/js/main.95534d78.chunk.js"
   ]
 }
