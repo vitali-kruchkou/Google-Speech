@@ -13,7 +13,7 @@ const Style = {
     }
     & > button {
       font-size: 20px;
-      height: 50px;
+      height: 40px;
     }
   `,
 };

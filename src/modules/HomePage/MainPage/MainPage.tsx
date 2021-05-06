@@ -63,8 +63,10 @@ const MainPage: React.FC = () => {
 
   return (
     <>
-      <Button onClick={signOut}>{t('signOut.buttonSignOut')}</Button>
-      <Score />
+      <Style.Header>
+        <Button onClick={signOut}>{t('signOut.buttonSignOut')}</Button>
+        <Score />
+      </Style.Header>
       <WordsList />
       <Style.Buttons>
         <SpeechRecording />
