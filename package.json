@@ -2,7 +2,7 @@
   "name": "google-speech",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://vitali-kruchkou.github.io/Innowise-Lab-Internship-Level-1-Google-Speech/",
+  "homepage": "https://vitali-kruchkou.github.io/Innowise-Lab-Internship-Level-1-Google-Speech/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
