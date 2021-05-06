@@ -4,11 +4,11 @@ import { Color } from '@constants/colors';
 const Style = {
   Container: styled.div`
     width: 1100px;
-    height: 550px;
+    height: 530px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
   `,
   Groups: styled.div`
     width: 500px;
