@@ -27,12 +27,8 @@ const Score: React.FC = () => {
     (state: RootStateOrAny) => state.currentWords.allWords,
   );
 
-  const getAllScore = useSelector(
-    (state: RootStateOrAny) => state.currentWords.score,
-  );
-
   const [score, setScore] = useState(0);
-  const [word, setWord] = useState(getAllScore);
+  const [word, setWord] = useState('');
   const [unpredWords, setUnpredWords] = useState([]);
   const [guessedWords, setGuessedWords] = useState([]);
   const { t } = useTranslation();
@@ -51,11 +47,12 @@ const Score: React.FC = () => {
   useEffect(() => {
     setWord(speechWord);
     unpredWords.map((item: WordsObject) => {
-      if (item.word === word) {
+      if (word.indexOf(item.word) >= 0) {
         setGuessedWords([item]);
       }
     });
   }, [speechWord, unpredWords, word]);
+  console.log(word);
 
   useEffect(() => {
     setUnpredWords(
@@ -67,7 +64,7 @@ const Score: React.FC = () => {
   useEffect(() => {
     unpredWords.map((item: WordsObject) => {
       if (word) {
-        if (item.word === word.toLocaleLowerCase()) {
+        if (word.indexOf(item.word) >= 0) {
           const fractionalPart = Number(getWordsFetch[0].group);
           const wholePart = 10;
           const numberOfPoints = (

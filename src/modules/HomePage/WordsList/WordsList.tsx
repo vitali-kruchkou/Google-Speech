@@ -45,7 +45,7 @@ const WordsList: React.FC = () => {
 
   useEffect(() => {
     if (speechWord) {
-      setSpokenWord(speechWord);
+      setSpokenWord(speechWord.split(' ').pop());
     }
   }, [speechWord]);
 

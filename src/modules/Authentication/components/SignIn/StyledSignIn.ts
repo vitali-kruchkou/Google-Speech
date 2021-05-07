@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Color } from '@core/constants/colors';
+import { Adaptive } from '@core/constants/adaptive';
 
 const Styled = {
   Container: styled.div`
@@ -49,6 +50,10 @@ const Styled = {
     border: 1px solid ${Color.MainAuthBorder};
     padding: 80px;
     box-shadow: ${Color.MainAuthBorder};
+    @media (max-width: ${Adaptive.notebook}) {
+      box-shadow: none;
+      border: none;
+    }
   `,
   Title: styled.span`
     font-size: 30px;

@@ -42,12 +42,14 @@ const LongTermStatistics: React.FC = () => {
 
   return (
     <>
-      <Button type="primary" onClick={hanlderBackButton}>
-        {t('LongStatistics.buttonReturn')}
-      </Button>
-      <Button onClick={handlerSortButtons}>
-        {t('LongStatistics.sortByScore')}
-      </Button>
+      <Style.Buttons>
+        <Button type="primary" onClick={hanlderBackButton}>
+          {t('LongStatistics.buttonReturn')}
+        </Button>
+        <Button onClick={handlerSortButtons}>
+          {t('LongStatistics.sortByScore')}
+        </Button>
+      </Style.Buttons>
       <Style.UsersTable>
         <tr>
           <tr>{t('LongStatistics.position')}</tr>

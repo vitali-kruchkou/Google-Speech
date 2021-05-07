@@ -32,7 +32,7 @@ const SpeechRecording: React.FC = () => {
 
   const renderSpeech = useCallback(() => {
     microphoneRef.current.classList.add('listening');
-    SpeechRecognition.startListening({ language: 'en-US' });
+    SpeechRecognition.startListening({ language: 'en-US', continuous: true });
   }, []);
 
   const stopHandle = useCallback(() => {
@@ -56,6 +56,9 @@ const SpeechRecording: React.FC = () => {
       <Style.Buttons>
         <Button type="primary" onClick={handleReset}>
           {t('SpeechRecording.buttonReset')}
+        </Button>
+        <Button type="primary" onClick={stopHandle}>
+          {t('SpeechRecording.buttonStop')}
         </Button>
         <Button
           type="primary"

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Color } from '@constants/colors';
+import { Adaptive } from '@core/constants/adaptive';
 
 const Style = {
   Container: styled.div`
@@ -7,6 +8,9 @@ const Style = {
     max-height: 600px;
     overflow: scroll;
     margin: 0 auto;
+    @media (max-width: ${Adaptive.notebook}) {
+      max-height: 500px;
+    }
   `,
   Words: styled.div`
     max-width: 250px;

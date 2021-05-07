@@ -9,7 +9,7 @@ const Style = {
     justify-content: space-between;
 
     & > #buttonSpeak {
-      width: 400px;
+      width: 300px;
     }
     & > button {
       font-size: 20px;

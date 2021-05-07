@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Color } from '@constants/colors';
+import { Adaptive } from '@core/constants/adaptive';
 
 const Style = {
   Container: styled.div`
@@ -9,6 +10,9 @@ const Style = {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    @media (max-width: ${Adaptive.notebook}) {
+      width: 700px;
+    }
   `,
   Groups: styled.div`
     width: 500px;
@@ -29,6 +33,9 @@ const Style = {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    @media (max-width: ${Adaptive.notebook}) {
+      width: 700px;
+    }
   `,
   Words: styled.div`
     width: 200px;
@@ -41,6 +48,9 @@ const Style = {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+    @media (max-width: ${Adaptive.notebook}) {
+      width: 120px;
+    }
   `,
   WordsText: styled.div`
     width: 100px;

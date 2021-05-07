@@ -91,6 +91,7 @@
   "SpeechRecording": {
     "buttonSpeak": "Speak please",
     "buttonReset": "Reset",
+    "buttonStop": "Stop speak",
     "notBrowserSupportSpeechRecording": "Ups, your browser is not supported!"
   },
   "Statistics": {

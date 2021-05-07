@@ -13,6 +13,10 @@ const Style = {
       text-align: center;
     }
   `,
+  Buttons: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
 };
 
 export default Style;
