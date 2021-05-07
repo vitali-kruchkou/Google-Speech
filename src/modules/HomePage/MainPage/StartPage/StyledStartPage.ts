@@ -1,3 +1,4 @@
+import { Adaptive } from '@core/constants/adaptive';
 import styled from 'styled-components';
 
 const Style = {
@@ -12,6 +13,13 @@ const Style = {
       width: 400px;
       height: 60px;
       font-size: 30px;
+    }
+    @media (max-width: ${Adaptive.smartphone}) {
+      & > h3 {
+        width: 300px;
+        text-align: center;
+        margin: 0 auto;
+      }
     }
   `,
 };

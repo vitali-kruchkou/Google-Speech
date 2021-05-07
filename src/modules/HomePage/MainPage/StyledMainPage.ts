@@ -1,3 +1,4 @@
+import { Adaptive } from '@core/constants/adaptive';
 import styled from 'styled-components';
 
 const Style = {
@@ -11,6 +12,12 @@ const Style = {
     & > button {
       font-size: 20px;
       height: 40px;
+    }
+    @media (max-width: ${Adaptive.smartphone}) {
+      text-align: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 300px;
     }
   `,
   Header: styled.div`

@@ -13,6 +13,12 @@ const Style = {
     @media (max-width: ${Adaptive.notebook}) {
       width: 700px;
     }
+    @media (max-width: ${Adaptive.smartphone}) {
+      width: 390px;
+      height: 600px;
+      justify-content: space-around;
+      padding: 0;
+    }
   `,
   Groups: styled.div`
     width: 500px;
@@ -21,6 +27,14 @@ const Style = {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    @media (max-width: ${Adaptive.smartphone}) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 300px;
+      & > button {
+        margin: 5px;
+      }
+    }
   `,
   MainImage: styled.div`
     margin: 0 auto;
@@ -36,6 +50,11 @@ const Style = {
     @media (max-width: ${Adaptive.notebook}) {
       width: 700px;
     }
+    @media (max-width: ${Adaptive.smartphone}) {
+      flex-wrap: wrap;
+      width: 350px;
+      height: 200px;
+    }
   `,
   Words: styled.div`
     width: 200px;
@@ -49,6 +68,10 @@ const Style = {
     align-items: center;
     justify-content: space-around;
     @media (max-width: ${Adaptive.notebook}) {
+      width: 120px;
+    }
+    @media (max-width: ${Adaptive.smartphone}) {
+      flex-direction: column;
       width: 120px;
     }
   `,
